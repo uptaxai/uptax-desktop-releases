@@ -19,6 +19,18 @@ and automatic updates. Application source and build tooling belong in
 
 ## Build and validation
 
+- Routine releases do not require the user's personal testing, sign-off, or
+  a particular Windows test account. Verification belongs to the release
+  operator, preferably through automated synthetic checks.
+- Mapping-only fixes may record `install-update` as `not-required` with a
+  reason and reviewed unchanged installer/updater/runtime/build inputs.
+  Source tests, package checks, mapping regressions, and hashes still apply.
+  Never report an unperformed check as passed or excuse a known failure.
+- Changes to installation, updates, startup, runtime dependencies, or
+  installation settings require relevant synthetic install/update evidence.
+  Use the release operator's test environment; do not make the user's manual
+  testing a routine release gate. Missing infrastructure is a technical
+  blocker to report, not a personal testing assignment for the user.
 - Build once and publish the exact tested bytes. Freeze SHA-256 hashes and
   byte sizes of the EXE, blockmap, and updater metadata after testing; any
   rebuild or replacement invalidates that evidence and requires retesting.
