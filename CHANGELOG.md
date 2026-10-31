@@ -1,3 +1,43 @@
+## v0.2.70 - 2026-11-01 (Draft)
+
+Previous production release: [v0.2.69](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.69)
+Source: https://github.com/uptaxai/uptax-integrations, baseline 1f466d50d2e973de6063669614a8df27ee3777c3, candidate 474ac7620bf23ff41c39b86cf0b4f98b9a4c8e95.
+
+### Added
+
+- Drake 2025 can import a source-backed Form 1095-A policy when the policy and tax-family facts agree.
+- Drake Form 1125-A can carry reconciled, source-described Other costs. A source-labeled purchases amount can fill the verified purchases field.
+
+### Fixed
+
+- If Drake asks for sign-in during client lookup, UpTax tells the preparer and resumes the same send after sign-in. Read-only searches now have a deadline.
+- Drake 1120-S identity and Page 1 deductions use verified fields. Unsplit officer pay and wages remain for manual review.
+- Form 1098 uses the routed deductible interest and Schedule A tax amounts while retaining the original Box 1 amount separately. A zero deductible share clears an older saved deduction.
+- Invalid or ambiguous capital sales, W-2s, 1099-DIV payers, 1099-R payers and shareholder K-1 groups stay out of Drake as complete groups. Independent valid records can still import.
+- A readable intact transfer is not refused solely because it is marked not ready or pro forma. A supported pro-forma 1120 import displays the fax-or-mail filing warning.
+
+### Changed or removed
+
+- No supported tax year, return type or previously shipped mapping was removed. ATX, Lacerte, CCH and ProSeries packaged resources retain their v0.2.69 bytes.
+- CCH no longer refuses a readable file solely because of a readiness flag; its unsupported 1120 package still stops before import.
+
+### Preservation and validation
+
+- The published v0.2.69 source is an ancestor of the built commit. Both actual installer payloads contain 2,796 paths; 10 reviewed paths changed and none were added or removed.
+- The full pinned source run passed 523 suites with no runner failures or skips. The exact built checkout passed 983 native Release tests with no failures or skips. Packaged importer preflights matched v0.2.69, and packaged updater and Drake review window checks passed.
+- The isolated Windows harness passed all 32 synthetic scenarios with the same assertions and a longer test wrapper deadline. No live client saved-return calculation has been verified with this installer.
+- A separate-account install or upgrade was not repeated because installer and updater inputs are unchanged. The foreground window changed during the extended packaged-DLL harness; that observation does not identify a cause.
+
+### Upgrade steps
+
+- Accept the UpTax update or install the new Windows x64 installer.
+
+### Known limitations
+
+- Preparer review items still require completion and calculation in Drake before filing. UpTax does not infer missing ownership, labor splits or prior-year carryovers.
+- Existing uncertain send outcomes must be reconciled in Drake before repeating a file. The affected saved client returns have not been verified with this version.
+- This Windows installer is unsigned.
+
 ## v0.2.69 - 2026-10-31 (Published)
 
 Previous production release: [v0.2.68](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.68)
