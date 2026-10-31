@@ -1,4 +1,4 @@
-## v0.2.70 - 2026-11-01 (Draft)
+## v0.2.70 - 2026-11-01 (Published)
 
 Previous production release: [v0.2.69](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.69)
 Source: https://github.com/uptaxai/uptax-integrations, baseline 1f466d50d2e973de6063669614a8df27ee3777c3, candidate 474ac7620bf23ff41c39b86cf0b4f98b9a4c8e95.
