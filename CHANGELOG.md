@@ -1,3 +1,39 @@
+## v0.2.75 - 2026-11-04 (Published)
+
+Previous production release: [v0.2.74](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.74).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `b156d7c83965fbd43aaf876f4cff1144f0308a04`, candidate `17d1d6433be1974e879281c9fb97ccba4796abd7`.
+
+### Added
+
+- None.
+
+### Fixed
+
+- A new ProSeries 1040 client can create a native blank from the supplied form plan without requiring a private form-list file that is absent from the installer.
+- Saved-return verification handles an empty list of fields needing repair in Windows PowerShell and accepts ProSeries' trailing-dot format for whole-dollar W-2 wages.
+- Full Calc attempts guarded foreground recovery after the idle wait before reporting that the return lost focus.
+
+### Changed or removed
+
+- Removed behavior: None. Existing-client updates, the Full Calc workflow, the v0.2.74 interface, other integrations, and supported tax years remain. ProSeries 2025 Form 1040 remains the public route with 82 destinations: 11 verified and 71 candidate.
+
+### Preservation and validation
+
+- The v0.2.74 built source is an ancestor of candidate `17d1d6433be1974e879281c9fb97ccba4796abd7`; the complete source diff has seven changed files, including version/build metadata and the release changelog. No mapping files changed.
+- The exact v0.2.75 installer extraction matches its build output across 2,608 files. Expanded v0.2.74 and v0.2.75 payloads each contain 2,910 files: seven changed, none added or removed, and no removed JSON leaves. Mapping, converter, and generated-profile files are unchanged; eight checked ProSeries scripts match the candidate source. The packaged app reports v0.2.75, the intended source and frontend revisions, no test mocks, and the Send button.
+- A live synthetic new-client run using the candidate source created a native blank and `.25I`, verified five of five written inputs with zero missing, ran Full Calc for wages and withholding, saved, and reopened the return. This run does not substitute for testing the exact packaged installer.
+- The package and packaged updater checks passed. The desktop serial rerun passed 382 tests with zero failures and five CCH-specific skips; 197 ProSeries JavaScript tests, eight offline PowerShell suites, and 13 release-gate regression tests passed. The first JavaScript run differed on one generated-file line-ending assertion in the detached worktree; its normalized rerun passed. The exact-artifact release-gate result is retained with the release manifest.
+- The broad `./run-tests.sh` run was attempted but did not finish. It recorded 65 passing suites before a .NET test failed because vendor templates were missing and a Drake drift test reported pinned-hash drift; the run was stopped at a bounded point. These failures did not occur in the scoped ProSeries checks above.
+
+### Upgrade steps
+
+- Accept the Windows x64 UpTax update or install the v0.2.75 installer. Review the ProSeries return before filing.
+
+### Known limitations
+
+- The converter does not map every possible 1040 JSON field. Unmapped facts remain manual items and candidate mappings require preparer review.
+- The synthetic run does not prove compatibility with every ProSeries installation or every 1040 form combination. The exact installer was staged and extracted offline but was not installed and reopened on this PC because an existing UpTax instance was running and NSIS installation changes shared registry, shortcuts, and user profile. A live end-to-end import or update check of this installer was therefore not performed.
+
 ## v0.2.74 - 2026-11-04 (Published)
 
 Previous production release: [v0.2.73](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.73).
