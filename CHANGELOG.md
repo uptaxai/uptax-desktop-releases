@@ -11,7 +11,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 - Send to ProSeries uses ProSeries' own `SaveDirectory` for saved-client lookup and `.25I` placement, even when a stale UpTax environment override names another folder.
 - A new 1040 send creates and checks a ProSeries-native blank return with its required forms before writing the client `.25I`.
-- Three-copy partnership K-1 checks follow saved native copy identities rather than XML form order while retaining duplicate and mismatch guards.
+- Three-copy partnership K-1 checks follow saved native copy identities rather than XML form order. A freshly ProSeries-created blank can supply the K-1 template after its same-run hash and native shape are checked; duplicate and mismatch guards remain. UpTax reports a specific native-proof error when those checks fail.
 
 ### Changed or removed
 
