@@ -1,3 +1,36 @@
+## v0.2.74 - 2026-11-04 (Draft)
+
+Previous production release: [v0.2.73](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.73).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `896ab402f35c8f6bf1bb6647ed18e74556cb6d7f`, candidate `b156d7c83965fbd43aaf876f4cff1144f0308a04`.
+
+### Added
+
+- None.
+
+### Fixed
+
+- Send to ProSeries uses ProSeries' own `SaveDirectory` for saved-client lookup and `.25I` placement, even when a stale UpTax environment override names another folder.
+- A new 1040 send creates and checks a ProSeries-native blank return with its required forms before writing the client `.25I`.
+- Three-copy partnership K-1 checks follow saved native copy identities rather than XML form order while retaining duplicate and mismatch guards.
+
+### Changed or removed
+
+- Removed behavior: None. Existing-client updates, Full Calc, supported tax years and return types, and the v0.2.73 frontend remain. The 1040 profile still has 82 destinations: 11 verified and 71 candidate.
+
+### Preservation and validation
+
+- The v0.2.73 built source is an ancestor of this candidate. The installer builder uses the exact published v0.2.73 EXE and extracted payload as its preservation baseline.
+- The v0.2.74 installer was built with the packaged dependency and bundled-resource checks. At the user's request, new tests and live ProSeries verification were skipped; the new-client and multi-copy K-1 paths remain unverified. No release gate or production publication is claimed.
+
+### Upgrade steps
+
+- Install the Windows x64 UpTax build when its release gate and import checks are complete. Review the ProSeries return before filing.
+
+### Known limitations
+
+- The converter does not cover every possible 1040 JSON field. Unmapped facts remain manual items, and candidate mappings require preparer review.
+- This corrective EXE has not completed a live new-client or multi-copy K-1 import.
+
 ## v0.2.73 - 2026-11-04 (Published)
 
 Previous production release: [v0.2.72](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.72).
