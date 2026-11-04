@@ -1,3 +1,41 @@
+## v0.2.73 - 2026-11-04 (Draft)
+
+Previous production release: [v0.2.72](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.72).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `e4939708c5cd6b66f7490c2d1f8faf19e365ecb9`, candidate `1011f675fca11777ca53e73858d3c42cbd159d8e`.
+
+### Added
+
+- Send to ProSeries for 2025 Form 1040 converts supported UpTax JSON inputs into a ProSeries `.25I` return. It finds a saved client by full SSN, updates that return or creates a new one, opens it, runs the guarded Full Calc command, saves, verifies supported inputs and calculated outputs, and reopens it for preparer review.
+- The Send dialog reports conversion, client lookup, file writing, opening, calculation, saving, and verification separately. A repeat click safely replaces an earlier UpTax ProSeries job.
+- The packaged 1040 profile has 82 destinations: 11 verified and 71 candidate. Candidate writes are marked for preparer review.
+
+### Fixed
+
+- An existing matched client is backed up before mapped inputs are updated. Unnamed fields are preserved; duplicate matches or unreadable client files stop the send.
+- The 1040 import no longer retypes written fields on screen to trigger calculation.
+- Unexpected nested contact facts in the 1040 JSON are recorded as unmapped items instead of being silently omitted ([source PR #166](https://github.com/uptaxai/uptax-integrations/pull/166)).
+
+### Changed or removed
+
+- Removed behavior: screen retype in the new ProSeries 1040 route. The eight-second idle guard remains before native ProSeries input.
+- ProSeries catalogs for 1120-S, 1120, 1065, and 990 are included as source work, but this release does not enable their public ProSeries imports. No previously supported tax year, return type, or mapping was intentionally removed.
+- The Windows installer bundles the UpTax interface and keeps the GitHub update feed. ATX, CCH, Drake, and Lacerte resources from v0.2.72 are retained.
+
+### Preservation and validation
+
+- The published v0.2.72 source is an ancestor of candidate `1011f675fca11777ca53e73858d3c42cbd159d8e`. The reviewed source diff adds ProSeries converter, mapping catalogs, native import, desktop bridge, tests, packaging, documentation, and the contact-census correction.
+- Focused desktop ProSeries tests passed 52/52 as recorded in the source release entry. Packaged-payload comparison, mapping regression, synthetic install/update, broad source tests, and the final release gate must be recorded here from the exact final installer before publication; none is claimed as passed in this draft.
+
+### Upgrade steps
+
+- Accept the Windows x64 UpTax update or install the 0.2.73 installer. Review each ProSeries return before filing.
+
+### Known limitations
+
+- The 82 packaged destinations do not cover every possible 1040 JSON input. Candidate mappings and unmapped inputs need preparer review; an imported return is not automatically ready to e-file.
+- Full Calc has saved-output proof for selected wages, withholding, interest, pension or fully taxable IRA, and partnership K-1 cases. Other calculations remain unproved or unresolved; the current installed-app return has not completed end-to-end verification.
+- Firm loading has shown a server-side database failure in an installed session. The responsible team is handling it separately; this desktop release does not change the server.
+
 ## v0.2.72 - 2026-11-04 (Published)
 
 Previous production release: [v0.2.71](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.71)
