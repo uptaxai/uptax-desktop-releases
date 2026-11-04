@@ -1,3 +1,71 @@
+## v0.2.72 - 2026-11-04 (Draft)
+
+Previous production release: [v0.2.71](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.71)
+Source: https://github.com/uptaxai/uptax-integrations, baseline 830d40c53e8c6507c9e7fb2ba053b62ca4f6d2e9, candidate e4939708c5cd6b66f7490c2d1f8faf19e365ecb9.
+
+### Added
+
+- None.
+
+### Fixed
+
+- CCH 2025 individual imports assign one sequence of activity numbers across partnership, S-corporation, and fiduciary K-1s. Mixed K-1 returns no longer reuse an activity number and fail while updating a later K-1 form.
+- If CCH creates a return before rejecting a form, Send tells the preparer to inspect that return in CCH Return Manager before retrying. A partial import no longer triggers an automatic resend solely to fill a spouse SSN.
+
+### Changed or removed
+
+- Removed behavior: None relative to v0.2.71.
+- CCH K-1 unit and instance numbering changed for mixed K-1 types. No CCH field binding or mapping key was added or removed. Supported tax years, return types, installer configuration, ATX and Drake work from v0.2.71, and other integrations are preserved.
+
+### Preservation and validation
+
+- The published v0.2.71 source is an ancestor of the candidate. The reviewed source diff changes the CCH writer, Send failure handling, their regression tests, the desktop version, and the source changelog.
+- Native CCH synthetic imports and exact-client re-exports retained every submitted value across two partnership K-1s, one S-corporation K-1, and one fiduciary K-1. The desktop suite passed 335 tests without skips, and the CCH Node suite passed 494 tests. Focused CCH source tests passed 123 cases with four existing skips; the published v0.2.71 source passed 116 cases with the same four skips.
+- The extracted published v0.2.71 and candidate installers each contain 2,796 payload paths. Twelve reviewed paths changed, none were added or removed, and no JSON mapping leaves were removed. Four ATX bridge files differ only by CRLF versus LF line endings; their normalized contents match. The four CCH profiles and five ATX templates retain their published hashes.
+- The initial full repository run stopped after 227 runner suites because C: ran out of space. A retry with free disk passed the focused Lacerte broker/K-1 mutation test and 67 further Lacerte suites before the broad run was stopped after known failures. The native Drake suite still needs licensed Drake 2025; the Drake Online extension drift predates this release and is outside the user-directed desktop scope. A CCH metadata guard failed against older backend producer checkouts, then passed 128 tests with two skips against reviewed backend commit `1a27b874ae41646bdb7adb179c9d064781fab9ea`. All six ATX offline package cases passed, and ProSeries 1120-S source coverage proved 358 of 358 end states. The broad repository run did not pass; the release plan records the scoped validation and remaining limitations.
+
+### Upgrade steps
+
+- Accept the UpTax update or install the new Windows x64 installer after publication.
+
+### Known limitations
+
+- A previous CCH import error may have created a partial return. Inspect it in CCH before retrying; this release does not repair an already partial real-client return.
+- CCH fields listed for manual entry still require preparer completion and review. The affected real-client return has not been resent or recalculated with this candidate. The Windows installer is unsigned.
+
+## v0.2.71 - 2026-11-04 (Published)
+
+Previous production release: [v0.2.70](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.70)
+Source: https://github.com/uptaxai/uptax-integrations, baseline 474ac7620bf23ff41c39b86cf0b4f98b9a4c8e95, candidate 830d40c53e8c6507c9e7fb2ba053b62ca4f6d2e9.
+
+### Added
+
+- No new return type or tax year.
+
+### Fixed
+
+- ATX Form 1040 sends include source-backed 1099-G unemployment and dividend payer inputs when the separate source document list omits them.
+- Dividend and interest payer worksheets keep Schedule B in the ATX package.
+- An existing ATX return send compares saved Schedule 1 unemployment with the UpTax source amount and flags a difference for preparer review.
+- ATX can match an existing Form 1065 return by EIN and legal name. Form 1040 review notes group calculated totals and blank or zero inputs.
+
+### Changed or removed
+
+- No supported mapping was intentionally removed. The v0.2.70 Drake changes remain in the source used for this build.
+
+### Preservation and validation
+
+- Desktop tests: 328 passed, 5 skipped. All four ATX offline whole-return suites passed, including existing-return replay. Importer smoke and Windows update checks passed. An attended send verified matching dividend amounts and a repeat update of the same ATX return. A separate unemployment send correctly stopped on a taxpayer ID mismatch before import.
+- The broader repository test run was attempted but did not pass because of pre-existing Drake Online drift and backend contract failures. It is not passing evidence for this release.
+
+### Upgrade steps
+
+- Accept the UpTax update or install the Windows x64 installer.
+
+### Known limitations
+
+- A taxpayer ID mismatch requires correction from confirmed records before ATX import. Preparers must review saved forms and calculated amounts before filing. The installer is unsigned.
+
 ## v0.2.70 - 2026-11-01 (Published)
 
 Previous production release: [v0.2.69](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.69)
