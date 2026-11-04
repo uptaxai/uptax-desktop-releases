@@ -1,4 +1,4 @@
-## v0.2.72 - 2026-11-04 (Draft)
+## v0.2.72 - 2026-11-04 (Published)
 
 Previous production release: [v0.2.71](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.71)
 Source: https://github.com/uptaxai/uptax-integrations, baseline 830d40c53e8c6507c9e7fb2ba053b62ca4f6d2e9, candidate e4939708c5cd6b66f7490c2d1f8faf19e365ecb9.
@@ -26,12 +26,12 @@ Source: https://github.com/uptaxai/uptax-integrations, baseline 830d40c53e8c6507
 
 ### Upgrade steps
 
-- Accept the UpTax update or install the new Windows x64 installer after publication.
+- Accept the UpTax update or install the new Windows x64 installer.
 
 ### Known limitations
 
 - A previous CCH import error may have created a partial return. Inspect it in CCH before retrying; this release does not repair an already partial real-client return.
-- CCH fields listed for manual entry still require preparer completion and review. The affected real-client return has not been resent or recalculated with this candidate. The Windows installer is unsigned.
+- CCH fields listed for manual entry still require preparer completion and review. The affected real-client return has not been resent or recalculated with this release. The Windows installer is unsigned.
 
 ## v0.2.71 - 2026-11-04 (Published)
 
