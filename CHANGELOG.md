@@ -1,3 +1,35 @@
+## v0.2.76 - 2026-11-05 (Published)
+
+Previous production release: [v0.2.75](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.75).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `17d1d6433be1974e879281c9fb97ccba4796abd7`, candidate `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`.
+
+### Added
+
+- None.
+
+### Fixed
+
+- Send to ProSeries remains visible for a 2025 Form 1040 when the desktop cannot use its local ProSeries profile. The disabled action explains whether ProSeries 2025 or its verified profile is unavailable.
+
+### Changed or removed
+
+- Removed behavior: silently hiding Send to ProSeries when profile validation fails. Import remains blocked until the local ProSeries installation and profile pass the existing checks.
+- No mapping coverage, supported tax year or return type, or other tax-software integration changes are intended. ProSeries 2025 Form 1040 remains the public route with 82 packaged destinations: 11 verified and 71 candidate.
+
+### Preservation and validation
+
+- The candidate is based on the exact published v0.2.75 source and builder preservation inputs. The button change touches frontend visibility and fixed-code profile-status plumbing; it does not alter the converter or native import.
+- The installer build and its required package checks completed; staged EXE, blockmap, and updater-metadata hashes matched the local build. At the user's request for an urgent build, optional source tests, a full installer payload comparison, and live ProSeries verification were skipped. No skipped check is presented as a pass.
+
+### Upgrade steps
+
+- Install the Windows x64 v0.2.76 update. If Send to ProSeries is disabled, read its explanation and check the ProSeries 2025 installation or contact UpTax for a profile matching that ProSeries build.
+
+### Known limitations
+
+- This update exposes the reason for an unavailable ProSeries route; it does not make an unverified ProSeries version compatible.
+- The converter does not map every possible 1040 JSON input. Unmapped facts still require preparer handling, and candidate mappings require review. This update was not live tested on the affected client PC.
+
 ## v0.2.75 - 2026-11-04 (Published)
 
 Previous production release: [v0.2.74](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.74).
