@@ -1,7 +1,7 @@
 ## v0.2.73 - 2026-11-04 (Draft)
 
 Previous production release: [v0.2.72](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.72).
-Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `e4939708c5cd6b66f7490c2d1f8faf19e365ecb9`, candidate `1011f675fca11777ca53e73858d3c42cbd159d8e`.
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `e4939708c5cd6b66f7490c2d1f8faf19e365ecb9`, candidate `896ab402f35c8f6bf1bb6647ed18e74556cb6d7f`.
 
 ### Added
 
@@ -14,6 +14,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 - An existing matched client is backed up before mapped inputs are updated. Unnamed fields are preserved; duplicate matches or unreadable client files stop the send.
 - The 1040 import no longer retypes written fields on screen to trigger calculation.
 - Unexpected nested contact facts in the 1040 JSON are recorded as unmapped items instead of being silently omitted ([source PR #166](https://github.com/uptaxai/uptax-integrations/pull/166)).
+- The source release preservation gate can review this large ProSeries diff without hitting its prior 1 MB output limit.
 
 ### Changed or removed
 
@@ -23,7 +24,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Preservation and validation
 
-- The published v0.2.72 source is an ancestor of candidate `1011f675fca11777ca53e73858d3c42cbd159d8e`. The reviewed source diff adds ProSeries converter, mapping catalogs, native import, desktop bridge, tests, packaging, documentation, and the contact-census correction.
+- The published v0.2.72 source is an ancestor of candidate `896ab402f35c8f6bf1bb6647ed18e74556cb6d7f`. The reviewed source diff adds ProSeries converter, mapping catalogs, native import, desktop bridge, tests, packaging, documentation, the contact-census correction, and the release-gate output-limit fix.
 - Focused desktop ProSeries tests passed 52/52 as recorded in the source release entry. Packaged-payload comparison, mapping regression, synthetic install/update, broad source tests, and the final release gate must be recorded here from the exact final installer before publication; none is claimed as passed in this draft.
 
 ### Upgrade steps
