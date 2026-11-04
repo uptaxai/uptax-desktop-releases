@@ -1,3 +1,42 @@
+## v0.2.77 - 2026-11-05 (Draft)
+
+Previous production release: [v0.2.76](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.76).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`, candidate `cda097e7fc6598a4c8ffa6366747420b6bf3d630`.
+
+### Added
+
+- Send to ProSeries can create and verify up to six native partnership K-1 copies alongside two W-2 copies for a new 2025 Form 1040 client on the verified ProSeries build.
+
+### Fixed
+
+- A repeat Send can update a uniquely matched saved return when its existing K-1 and W-2 copies pass native identity and aggregate checks.
+- Saved-client lookup retries unreadable files briefly, then skips them and reports the count. Readable files are still searched by full SSN or EIN; unreadable files remain untouched. A hidden match in an unreadable file can cause a duplicate client.
+- Repeat sends ask for confirmation before updating a uniquely matched saved return. Cancel leaves it unchanged; approval backs it up and updates mapped fields.
+- Unchanged saved-client files reuse a content-hash-checked, current-user encrypted lookup cache. Changed files and positive matches are read again through ProSeries.
+- Interrupted synthetic native-copy preparation resumes only after verifying the saved form graph. ProSeries focus and short-lived HomeBase dialog handling are guarded before the next action.
+
+### Changed or removed
+
+- Removed behavior: the unconditional new-client block on more than three partnership K-1 copies and combined multi-K-1/multi-W-2 imports for the verified ProSeries 2025 build.
+- Removed behavior: an unreadable unrelated saved-client file blocks every transfer.
+- Mapping coverage, other integrations, supported return types, and tax years are unchanged from v0.2.76.
+
+### Preservation and validation
+
+- The exact v0.2.76 published source is an ancestor of the candidate. The build uses the verified v0.2.76 installer and payload as its preservation baseline.
+- Live synthetic new-client and repeat-update sends each wrote and verified 13 of 13 inputs across six K-1 and two W-2 copies, ran Full Calc, saved, and reopened. Calculated synthetic W-2 wage, withholding, and K-1 interest totals matched the source inputs.
+- The candidate package retains all previous packaged resources and mappings; 18 packaged paths changed or were added, with no removals. The 17 packaged runtime dependencies, updater metadata, Windows x64 architecture, and 40 focused release/ProSeries tests passed. The new skipped-file path and confirmation dialog have source tests but no packaged-app live test. The broad source suite has unrelated Drake/backend failures and is not reported as passed; the release gate remains pending.
+
+### Upgrade steps
+
+- Install the Windows x64 v0.2.77 update. Review the ProSeries return before filing.
+
+### Known limitations
+
+- Schedule A, C, D/8949, and E detail inputs remain incompletely mapped. This update does not make the 1040 converter complete.
+- Native copy creation remains limited to the verified ProSeries 2025 executable. Unverified installations stop before writing.
+- An unreadable saved return may contain the same tax ID, so a repeat send could create a duplicate client. Review the skipped-file warning and ProSeries client list before filing.
+
 ## v0.2.76 - 2026-11-05 (Published)
 
 Previous production release: [v0.2.75](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.75).
