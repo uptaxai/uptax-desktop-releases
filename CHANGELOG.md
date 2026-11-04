@@ -1,3 +1,38 @@
+## v0.2.74 - 2026-11-04 (Published)
+
+Previous production release: [v0.2.73](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.73).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `896ab402f35c8f6bf1bb6647ed18e74556cb6d7f`, candidate `b156d7c83965fbd43aaf876f4cff1144f0308a04`.
+
+### Added
+
+- None.
+
+### Fixed
+
+- Send to ProSeries uses ProSeries' own `SaveDirectory` for saved-client lookup and `.25I` placement, even when a stale UpTax environment override names another folder.
+- A new 1040 send creates and checks a ProSeries-native blank return with its required forms before writing the client `.25I`.
+- Three-copy partnership K-1 checks follow saved native copy identities rather than XML form order. A freshly ProSeries-created blank can supply the K-1 template after its same-run hash and native shape are checked; duplicate and mismatch guards remain. UpTax reports a specific native-proof error when those checks fail.
+
+### Changed or removed
+
+- Removed behavior: None. Existing-client updates, Full Calc, supported tax years and return types, and the v0.2.73 frontend remain. The 1040 profile still has 82 destinations: 11 verified and 71 candidate.
+
+### Preservation and validation
+
+- The v0.2.73 built source is an ancestor of this candidate. The installer builder used the exact published v0.2.73 EXE and extracted payload as its preservation baseline.
+- Exact installer extraction matches the build output across 2,608 files. The expanded v0.2.73 and v0.2.74 payloads each have 2,910 files: nine changed, none added or removed, and no removed JSON leaves. Mapping, converter, and generated-profile files are unchanged; the 1040 profile remains 82 destinations (11 verified, 71 candidate).
+- Packaged dependency, bundled-resource, installer-version, blockmap, updater-metadata, and synthetic updater-window checks passed. Desktop tests passed 382 with zero failures and five CCH-specific skips; 197 ProSeries JavaScript tests, eight offline PowerShell suites, and 13 release-gate tests passed. The initial desktop run had one timing-sensitive test failure that passed standalone and in the serial full rerun. The initial ProSeries JS run lacked an ignored workspace; after creating it, the serial suite passed.
+- A live ProSeries import was not run at the user's direction. New-client and multi-copy K-1 behavior remains unverified live. The exact-artifact release gate and production publication are pending in this draft.
+
+### Upgrade steps
+
+- Accept the Windows x64 UpTax update or install the v0.2.74 installer. Review the ProSeries return before filing.
+
+### Known limitations
+
+- The converter does not cover every possible 1040 JSON field. Unmapped facts remain manual items, and candidate mappings require preparer review.
+- A live new-client or multi-copy K-1 import was not performed for this corrective build.
+
 ## v0.2.73 - 2026-11-04 (Published)
 
 Previous production release: [v0.2.72](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.72).
