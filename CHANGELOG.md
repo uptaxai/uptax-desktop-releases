@@ -1,3 +1,37 @@
+## v0.2.75 - 2026-11-04 (Draft)
+
+Previous production release: [v0.2.74](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.74).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `b156d7c83965fbd43aaf876f4cff1144f0308a04`, candidate `17d1d6433be1974e879281c9fb97ccba4796abd7`.
+
+### Added
+
+- None.
+
+### Fixed
+
+- A new ProSeries 1040 client can create a native blank from the supplied form plan without requiring a private form-list file that is absent from the installer.
+- Saved-return verification handles an empty list of fields needing repair in Windows PowerShell and accepts ProSeries' trailing-dot format for whole-dollar W-2 wages.
+- Full Calc attempts guarded foreground recovery after the idle wait before reporting that the return lost focus.
+
+### Changed or removed
+
+- Removed behavior: None. Existing-client updates, the Full Calc workflow, the v0.2.74 interface, other integrations, and supported tax years remain. ProSeries 2025 Form 1040 remains the public route with 82 destinations: 11 verified and 71 candidate.
+
+### Preservation and validation
+
+- The v0.2.74 built source is an ancestor of candidate `17d1d6433be1974e879281c9fb97ccba4796abd7`; the complete source diff has seven changed files, including version/build metadata and the release changelog. No mapping files changed.
+- A live synthetic new-client run using the candidate source created a native blank and `.25I`, verified five of five written inputs with zero missing, ran Full Calc for wages and withholding, saved, and reopened the return. This run does not substitute for testing the exact packaged installer.
+- Exact installer payload comparison, source tests, packaged-app checks, install/update checks, and the final release gate are pending. Their results must be recorded here before publication.
+
+### Upgrade steps
+
+- Accept the Windows x64 UpTax update or install the v0.2.75 installer. Review the ProSeries return before filing.
+
+### Known limitations
+
+- The converter does not map every possible 1040 JSON field. Unmapped facts remain manual items and candidate mappings require preparer review.
+- The synthetic run does not prove compatibility with every ProSeries installation or every 1040 form combination. The exact packaged installer has not yet completed release validation.
+
 ## v0.2.74 - 2026-11-04 (Published)
 
 Previous production release: [v0.2.73](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.73).
