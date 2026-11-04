@@ -19,17 +19,19 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Preservation and validation
 
-- The v0.2.73 built source is an ancestor of this candidate. The installer builder uses the exact published v0.2.73 EXE and extracted payload as its preservation baseline.
-- The v0.2.74 installer was built with the packaged dependency and bundled-resource checks. At the user's request, new tests and live ProSeries verification were skipped; the new-client and multi-copy K-1 paths remain unverified. No release gate or production publication is claimed.
+- The v0.2.73 built source is an ancestor of this candidate. The installer builder used the exact published v0.2.73 EXE and extracted payload as its preservation baseline.
+- Exact installer extraction matches the build output across 2,608 files. The expanded v0.2.73 and v0.2.74 payloads each have 2,910 files: nine changed, none added or removed, and no removed JSON leaves. Mapping, converter, and generated-profile files are unchanged; the 1040 profile remains 82 destinations (11 verified, 71 candidate).
+- Packaged dependency, bundled-resource, installer-version, blockmap, updater-metadata, and synthetic updater-window checks passed. Desktop tests passed 382 with zero failures and five CCH-specific skips; 197 ProSeries JavaScript tests, eight offline PowerShell suites, and 13 release-gate tests passed. The initial desktop run had one timing-sensitive test failure that passed standalone and in the serial full rerun. The initial ProSeries JS run lacked an ignored workspace; after creating it, the serial suite passed.
+- A live ProSeries import was not run at the user's direction. New-client and multi-copy K-1 behavior remains unverified live. The exact-artifact release gate and production publication are pending in this draft.
 
 ### Upgrade steps
 
-- Install the Windows x64 UpTax build when its release gate and import checks are complete. Review the ProSeries return before filing.
+- Accept the Windows x64 UpTax update or install the v0.2.74 installer. Review the ProSeries return before filing.
 
 ### Known limitations
 
 - The converter does not cover every possible 1040 JSON field. Unmapped facts remain manual items, and candidate mappings require preparer review.
-- This corrective EXE has not completed a live new-client or multi-copy K-1 import.
+- A live new-client or multi-copy K-1 import was not performed for this corrective build.
 
 ## v0.2.73 - 2026-11-04 (Published)
 
