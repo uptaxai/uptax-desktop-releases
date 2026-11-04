@@ -1,4 +1,4 @@
-## v0.2.76 - 2026-11-05 (Draft)
+## v0.2.76 - 2026-11-05 (Published)
 
 Previous production release: [v0.2.75](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.75).
 Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `17d1d6433be1974e879281c9fb97ccba4796abd7`, candidate `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`.
@@ -19,7 +19,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Preservation and validation
 
 - The candidate is based on the exact published v0.2.75 source and builder preservation inputs. The button change touches frontend visibility and fixed-code profile-status plumbing; it does not alter the converter or native import.
-- At the user's request for an urgent build, optional source tests and live ProSeries verification were skipped. Package-required build checks and actual installer/payload comparison results will be recorded after the EXE is built. No skipped check is presented as a pass.
+- The installer build and its required package checks completed; staged EXE, blockmap, and updater-metadata hashes matched the local build. At the user's request for an urgent build, optional source tests, a full installer payload comparison, and live ProSeries verification were skipped. No skipped check is presented as a pass.
 
 ### Upgrade steps
 
