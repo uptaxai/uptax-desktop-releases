@@ -20,8 +20,9 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Preservation and validation
 
 - The v0.2.74 built source is an ancestor of candidate `17d1d6433be1974e879281c9fb97ccba4796abd7`; the complete source diff has seven changed files, including version/build metadata and the release changelog. No mapping files changed.
+- The exact v0.2.75 installer extraction matches its build output across 2,608 files. Expanded v0.2.74 and v0.2.75 payloads each contain 2,910 files: seven changed, none added or removed, and no removed JSON leaves. Mapping, converter, and generated-profile files are unchanged; eight checked ProSeries scripts match the candidate source. The packaged app reports v0.2.75, the intended source and frontend revisions, no test mocks, and the Send button.
 - A live synthetic new-client run using the candidate source created a native blank and `.25I`, verified five of five written inputs with zero missing, ran Full Calc for wages and withholding, saved, and reopened the return. This run does not substitute for testing the exact packaged installer.
-- Exact installer payload comparison, source tests, packaged-app checks, install/update checks, and the final release gate are pending. Their results must be recorded here before publication.
+- The package and packaged updater checks passed. The desktop serial rerun passed 382 tests with zero failures and five CCH-specific skips; eight offline ProSeries PowerShell suites and 13 release-gate regression tests passed. A ProSeries JavaScript rerun, live install/update verification, and the final exact-artifact release gate are pending. The first JavaScript run passed 196 of 197 assertions; one generated-file equality check differed only in line endings in the detached worktree.
 
 ### Upgrade steps
 
@@ -30,7 +31,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Known limitations
 
 - The converter does not map every possible 1040 JSON field. Unmapped facts remain manual items and candidate mappings require preparer review.
-- The synthetic run does not prove compatibility with every ProSeries installation or every 1040 form combination. The exact packaged installer has not yet completed release validation.
+- The synthetic run does not prove compatibility with every ProSeries installation or every 1040 form combination. The exact packaged installer has not been installed for a live end-to-end import or update check.
 
 ## v0.2.74 - 2026-11-04 (Published)
 
