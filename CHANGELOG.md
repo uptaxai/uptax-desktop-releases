@@ -1,7 +1,8 @@
 ## v0.2.78 - 2026-11-12 (Draft)
 
-Previous production release: [v0.2.77](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.77)
-Source: https://github.com/uptaxai/uptax-integrations, baseline 6e99db12a28a298e749de9c7771cd54a55feede8, candidate 8e962065b039b1039dd1fbd41ff787f4a7986ca5.
+Previous production: [v0.2.77](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.77), source `6e99db12a28a298e749de9c7771cd54a55feede8`.
+
+Actual built source: [8e962065b039b1039dd1fbd41ff787f4a7986ca5](https://github.com/uptaxai/uptax-integrations/commit/8e962065b039b1039dd1fbd41ff787f4a7986ca5). Separate test-only validation source: [fbb6a4ee5507d2aebf18cc5346b04617abcb9a7a](https://github.com/uptaxai/uptax-integrations/commit/fbb6a4ee5507d2aebf18cc5346b04617abcb9a7a). The tested installer was built from the first commit and was not rebuilt from the second; all2,157 packaging inputs and63 runtime overlays are byte-identical.
 
 ### Added
 
@@ -110,12 +111,27 @@ Source: https://github.com/uptaxai/uptax-integrations, baseline 6e99db12a28a298e
 - Full-repository validation is retained separately from scoped Lacerte
   results. Known licensed-template, unrelated source-role and timing-sensitive
   test failures are reported as failures rather than passing evidence.
+- The optimized runtime passed 1,135 focused source tests with no failures or
+  skips, eight actual packaged workflow cases, two packaged performance cases,
+  and installation verification of 2,697 physical files and 302 ASAR members.
+  The installed working profile was preserved. The final validation manifest
+  distinguishes these overlapping checks from complete native-return coverage.
+- The separate validation harness retains the original historical serializer contract
+  separately from the current producer review and supplies a tracked,
+  deterministic offline OLT business-fixture generator. These changes preserve
+  existing assertions and do not change the tested application payload.
+- Drake native-runtime/catalog and original-mapper drift failures are excluded
+  from the required passing scope for this release by explicit user direction.
+  They remain recorded as failures; other required checks remain mandatory.
 
 ### Upgrade steps
 
 Install the Windows x64 update and review the imported return and report before
 filing. Deploy the separately reviewed backend source-conservation change to
 provide its additional originals; an EXE cannot add omitted server JSON facts.
+If an earlier unpublished 0.2.78 or a higher unpublished version is installed,
+run this installer manually: the automatic updater does not replace an equal
+version or automatically downgrade a higher one.
 
 ### Known limitations
 
@@ -126,12 +142,20 @@ New candidates, false/zero clearing, broad source domains, complete statement
 readback and existing-client overlap need their documented qualifications.
 Other form profiles remain subject to their existing candidate/manual limits.
 Actual remote-user connection causes are not established by synthetic fixtures.
+The excluded Drake checks do not certify native Drake import behavior or resolve
+the outstanding original-mapper drift review. Drake source and packaged importer
+resources are preserved from the previous production release.
 Large audit artifacts can exceed the HTML report reader's size limits; an
 explicit warning identifies incomplete detail/counts. Retained job artifacts
 remain necessary for the complete input ledger; oversized files are not claimed
 to be fully displayed by the HTML report.
 Publish readiness requires the final exact-artifact release gate and truthful
 evidence; generated files or test counts alone do not certify it.
+
+The complete unchanged repository run finished with 628 passing suite commands and four failures. Two Drake failures remain failed and are excluded by explicit user instruction. The other two were validation-harness defects repaired in the separate test-only source above; actual reruns passed33 Lacerte,168 OLT and135 CCH tests with zero skips. The required non-Drake checks pass as a composed validation; the raw whole-repository command is not represented as a zero-exit run.
+
+Exact installer SHA-256: `4f638f989963379d2ee43646080baeb53b3ae8e605cebbb6f3ff74e56a844ebe`. Detailed sanitized validation and asset hashes: [release-validation.json](https://github.com/uptaxai/uptax-desktop-releases/releases/download/v0.2.78/release-validation.json).
+
 
 ## v0.2.77 - 2026-11-11 (Published)
 
