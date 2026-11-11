@@ -1,3 +1,138 @@
+## v0.2.78 - 2026-11-12 (Draft)
+
+Previous production release: [v0.2.77](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.77)
+Source: https://github.com/uptaxai/uptax-integrations, baseline 6e99db12a28a298e749de9c7771cd54a55feede8, candidate 8e962065b039b1039dd1fbd41ff787f4a7986ca5.
+
+### Added
+
+- Twenty-five guarded1120S candidate bindings: fiscal start/end, stock
+  acquisition Other text, five columns for four-plus shareholder loans,
+  Texas extension payment, California extension payment/prior credit and
+  registration identifiers, Georgia PTE election/admission/contact fields,
+  signed net income-adjustment statements, foreign entity address fields,
+  the explicit positive basis-order election and original beginning face-loan
+  principal. Principal is distinct from debt tax basis and the K-1 override.
+  The profile has286 bindings, retaining all120 existing saved proofs;
+  the166 candidates are not promoted by this release.
+- Exact original1099-DIV ordinary/qualified amount receipts associate with
+  already retained Schedule K amounts after received-K1 subtraction. No
+  additional native dividend amount is created. Incomplete sources and
+  book-dominant totals remain review items.
+- Typed original/context conservation and field-specific review receipts for
+  state, owner, period and representative facts, including null/zero/false.
+  The matching backend source-conservation candidate is
+  `bdcbc0128cac7a1c63cb92685c46549c4dcadfb7`; it requires separate deployment.
+
+### Fixed
+
+- Large-return preparation no longer repeatedly scans the full set of source
+  paths when propagating deferred-input relationships. Exact raw path boundaries,
+  original values, dependency decisions and review receipts are preserved.
+- Source accounting and review-task matching use per-conversion indexes instead
+  of rescanning every manual/deferred item for each source group. The earliest
+  matching task, source-less fallback and stable report order are unchanged;
+  review receipts are retained rather than removed to reduce processing time.
+- Review reports explicitly warn when a present audit file cannot be read or
+  exceeds the existing report size limits. Detailed source/preparer information
+  and counts are marked incomplete; normal missing early-stage files do not
+  trigger the warning. Original artifacts and read limits remain unchanged.
+- Lacerte connection waits tolerate bounded foreground activation and identify
+  unavailable data folders and connection stages. A unique hidden loaded
+  workspace can be restored without starting a duplicate application.
+- Contents navigation focuses the actual navigation control before typing a
+  screen number, checks focus at each input boundary, and does not click a
+  tax-input body while navigating. Foreground, modal, client-identity and
+  active-data-path guards remain enforced.
+- Dynamic loan records validate exact original cents before the existing
+  whole-dollar formatting, preserving physical row/owner identity and exact
+  original receipts. A malformed original cannot become valid by rounding.
+- Explicitly omitted live return facts no longer authorize an inferred
+  IRS-discussion blank command. The report requests recomputation and retains
+  independent cached amounts and ordinary explicit-answer behavior.
+- Saved-verification and promotion remain unavailable for new fields whose
+  complete native reader/proof protocol is unqualified. Missing identity or
+  linked destinations withhold dependent original receipt credit.
+- Qualified full-name links accept unambiguous ASCII case differences between
+  current owner and basis originals, including repeating loan records. Raw
+  source names and full-TIN identity guards remain intact.
+- A positive debt tax basis that rounds to zero uses the basis-only zero
+  command instead of invoking the principal default. Exact original cents and
+  complete parent/detail conservation remain required.
+- An explicit zero ending-buildings balance uses its field-specific zero
+  command instead of importing one dollar. Actual one-dollar balances remain
+  amounts; nonzero balances rounding to the automatic default need review.
+- An explicit zero shareholder ownership now stops Send before import.
+  Lacerte can otherwise substitute calculated stock and K-1 percentages.
+  Both percentages remain exact manual originals until a safe zero input is
+  qualified; deferring unsupported fields cannot bypass this stop.
+- Basis-row nondeductible amounts now explain the missing current-year,
+  adjustment, replacement or carryover classification. They remain separate
+  from the allocated current expense and are not added as a second carryover.
+- The current public ProSeries1040 fix is preserved: Send stops before any
+  create/update when a saved return remains unreadable after lookup retry,
+  since it could hide the same tax ID. This replaces the published warning
+  followed by an import and preserves the other ProSeries workflow.
+
+### Changed or removed
+
+- Removed behavior: interpreting explicit return-fact omission as an unanswered
+  IRS-discussion election, and rejecting complete dynamic loan populations
+  merely because their original amounts contain cents.
+- Existing import-only Send remains the default. It does not verify saved
+  values. Existing hand-entered amounts can remain and accumulate alongside
+  imports; review the resulting return and report.
+- No UI, dependency or updater-feed change. Other tax software behavior is
+  preserved apart from the current public ProSeries safety fix stated above.
+  Supported Lacerte file routing remains TY2025:1040.IB5,1065.PB5,
+  1120.CB5,1120S.SB5 and990.RB5. No filing/payment action is added.
+
+### Preservation and validation
+
+- The build preserves published v0.2.77, including the ProSeries1040 profile's
+  126 bindings, all frontend files, importer, ATX and CCH resources. Every
+  changed/new Lacerte runtime resource is explicitly inventoried and checked
+  against source; no previous mapping or proof is removed.
+- The preceding frozen mapping-source assembly passed1,113 composed tests with
+  zero failures/skips. Additional startup/lookup source tests passed246 cases,
+  an exact packaged-byte replay passed69 cases and direct packaged Find/startup
+  replay passed44 cases. These checks overlap and are not a coverage percentage
+  or proof of a saved Lacerte return.
+- Path-relation and source-accounting regressions exercise the actual production
+  functions and fail the old repeated-scan work bounds. The optimized paired
+  fixtures retain byte-identical public results and complete private diagnostics.
+  A28,033-leaf synthetic case completed in8.3seconds and retained its full
+  95.7MB diagnostics; the old implementation exceeded a240second measurement
+  limit. No old full-size output comparison is claimed for that timed-out case.
+- Exact-installer extraction, dependency/updater/architecture checks and
+  relevant synthetic startup/update evidence must be recorded in the final
+  release manifest. This source entry does not claim an unperformed install
+  or an unfinished release gate passed. No publication occurs during building.
+- Full-repository validation is retained separately from scoped Lacerte
+  results. Known licensed-template, unrelated source-role and timing-sensitive
+  test failures are reported as failures rather than passing evidence.
+
+### Upgrade steps
+
+Install the Windows x64 update and review the imported return and report before
+filing. Deploy the separately reviewed backend source-conservation change to
+provide its additional originals; an EXE cannot add omitted server JSON facts.
+
+### Known limitations
+
+Complete1120S mapping and full saved/reopened native qualification remain open.
+Explicit zero shareholder ownership currently requires manual review; this
+release stops the send rather than importing a different calculated allocation.
+New candidates, false/zero clearing, broad source domains, complete statement
+readback and existing-client overlap need their documented qualifications.
+Other form profiles remain subject to their existing candidate/manual limits.
+Actual remote-user connection causes are not established by synthetic fixtures.
+Large audit artifacts can exceed the HTML report reader's size limits; an
+explicit warning identifies incomplete detail/counts. Retained job artifacts
+remain necessary for the complete input ledger; oversized files are not claimed
+to be fully displayed by the HTML report.
+Publish readiness requires the final exact-artifact release gate and truthful
+evidence; generated files or test counts alone do not certify it.
+
 ## v0.2.77 - 2026-11-11 (Published)
 
 Previous production release: [v0.2.76](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.76).
