@@ -1,4 +1,4 @@
-## v0.2.77 - 2026-11-11 (Draft)
+## v0.2.77 - 2026-11-11 (Published)
 
 Previous production release: [v0.2.76](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.76).
 Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`, candidate `6e99db12a28a298e749de9c7771cd54a55feede8`.
@@ -28,11 +28,11 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 - An earlier synthetic new-client run wrote and read back 11 of 11 planned inputs across six K-1 and two W-2 copies, requested Full Calc, and reopened the saved return. Exact-source scoped checks for this rebuilt candidate passed: ProSeries 274/274, desktop 401 passed with 5 optional CCH skips, release tools 19/19, and pinned Lacerte producer checks 20/20.
 - Exact new installer SHA-256 is `6c9f4f9d001861a76482e8a8c455cc13357762375fdd19c714f0f7391ad44018`; blockmap SHA-256 is `00bac174b5512dedb7cc671d9ac0f88fd67288eb45b254f6b753e94ad01f5385`; `latest.yml` SHA-256 is `2dec2aa39dfcde1dd31b18901e771791c8944ff81ff275e2cc9ed747d4f2da65`. Package metadata passed and the exact payload was inventoried.
 - The new build completed the scoped mapped-input workflow, saved and reopened the return, and verified 34 of 34 planned inputs plus 2 of 2 calculated checks. The UI reported `PROSERIES_PARTIAL` because 16 dependent calculated checks require review, 24 candidate mapping values remain, and 44 source items still need entry. Complete JSON coverage and calculated Form 1040 line parity remain unproven; the user accepted these disclosed limits for publication.
-- The full repository suite has not passed: an earlier run recorded 557 passed and 8 failed, and the current required run is still in progress with reported failures. Inherited Drake failures and extension-only OLT failures remain excluded from this Windows EXE decision, not counted as passes. The exact rebuilt installer passed synthetic v0.2.76-to-v0.2.77 install/update and the release gate. Its assets are staged in an unpublished draft; no public release has been published.
+- The full repository suite has not passed: an earlier run recorded 557 passed and 8 failed, and the current required run reported failures. Inherited Drake failures and extension-only OLT failures remain excluded from this Windows EXE decision, not counted as passes. The exact rebuilt installer passed synthetic v0.2.76-to-v0.2.77 install/update and the release gate. The five release assets were published and downloaded again with matching hashes.
 
 ### Upgrade steps
 
-- After verification and publication, install the Windows x64 update and review the saved tax return in ProSeries before filing.
+- Install the Windows x64 update and review the saved tax return in ProSeries before filing.
 
 ### Known limitations
 
