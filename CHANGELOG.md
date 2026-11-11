@@ -1,7 +1,7 @@
 ## v0.2.77 - 2026-11-11 (Draft)
 
 Previous production release: [v0.2.76](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.76).
-Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`; final v0.2.77 candidate commit is pending the versioned rebuild. The feature source reviewed to date is `c69c3e9ba109f02b1bd4c39c2c999e6ed58a0c80`.
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`, candidate `2e8e0d8071140037d1e1f08ccab6e01ab754025e`.
 
 ### Added
 
@@ -23,9 +23,9 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Preservation and validation
 
-- The reviewed feature source descends from the published v0.2.76 source. An earlier private trial installer retained all 2,022 baseline bridge files, and its bundled ATX and CCH resources matched the baseline byte for byte. The final v0.2.77 installer still requires an exact extracted-payload comparison and release manifest.
+- Candidate source descends from the published v0.2.76 source. The exact v0.2.77 installer retains all 2,022 baseline bridge files; its bundled ATX and CCH resources match the baseline byte for byte. Extracted payload comparison found 63 added, 31 changed, and no removed paths, with a recorded review reason for every difference.
 - A synthetic new-client run wrote and read back 11 of 11 planned inputs across six K-1 and two W-2 copies, ran Full Calc, and reopened the saved return. Earlier scoped ProSeries JavaScript mapping tests passed 274 of 274. This does not establish complete JSON coverage or all Form 1040 calculated-line parity; final-build scoped checks remain pending.
-- Exact v0.2.77 installer, blockmap, and `latest.yml` SHA-256 hashes are pending the new build. No earlier v0.2.85 trial asset is designated for this release.
+- Exact v0.2.77 installer SHA-256 is `d3c94d1dda33ae7ec5bde8f90d1b2125ffed26d8f00cf4f24744eb8cb84eaaff`; blockmap SHA-256 is `888710f62637eacb8f15ababbe08f8f350901c2a3d229a2c2efb0024a474b4c5`; `latest.yml` SHA-256 is `9d029733b4d745b3c9e058a05c599b949fbc0c928cb6c22f4ea7429a249d5f4e`. The package metadata check passed for these exact bytes.
 - The full repository suite has not passed. Inherited Drake failures and extension-only OLT failures are recorded separately from the Windows EXE release decision; they are not counted as passing tests. The synthetic install/update check and release gate remain pending. This is a draft and has not been published.
 
 ### Upgrade steps
@@ -34,7 +34,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Known limitations
 
-- Complete 1040 JSON coverage and calculated-line reconciliation are not established. An unreadable saved-client file may conceal a tax-ID match; lookup warnings need review.
+- Complete 1040 JSON coverage and calculated-line reconciliation are not established. A saved-client file that remains unreadable after lookup retry may conceal a tax-ID match, so Send stops until the file can be reviewed.
 - An undated annual estimated-tax total has no proved native ProSeries input route and stops before import.
 
 ## v0.2.76 - 2026-11-05 (Published)
