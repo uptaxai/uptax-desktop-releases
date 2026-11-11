@@ -1,3 +1,40 @@
+## v0.2.85 - 2026-11-11 (Draft)
+
+Previous production release: [v0.2.76](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.76).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`, candidate `0b28016035278874c692a07da5d67d95fe73db5c`.
+
+### Added
+
+- The ProSeries 2025 Form 1040 preview supports the locally proved combination of six partnership K-1 copies and two W-2 copies. Its bundled native profile grows from 82 destinations in v0.2.76 to 126 (40 verified and 86 candidate), with no previous destination removed or downgraded. Candidate mappings and saved-value diagnostics have the native proof and coverage limits stated below.
+- Guided OLT source adds mappings and workflows for 1040, 1065, 1120, 1120S, and 990. Guided ProConnect source adds routing and 1040, 1120S, and 990 mapping changes. These browser-extension sources are not packaged in this Windows installer. Bundled CCH resources remain unchanged from v0.2.76; the separate ProSeries 1120S audit is not included.
+
+### Fixed
+
+- New-client ProSeries Send creates a blank 1040 on the user's installation, waits until ProSeries saves a readable file, and restores the converted `.25I` so HomeBase registers the client.
+- Restore selects Form 1040 even when ProSeries last showed a different return type. The opener selects the 1040 HomeBase view before locating the exact saved return.
+- Saved-client lookup retries unreadable files; an exact existing tax-ID match requires approval before update. Native copy setup recovers foreground focus and tolerates the observed form-label tooltip.
+- Lacerte Client Info navigation retries an absorbed tab click while retaining exact client and tax-ID verification.
+
+### Changed or removed
+
+- Removed behavior: directly writing an undated annual estimated-tax total to a calculated Form 1040 payment cell. The affected send stops before import because that route produced an inconsistent saved tax result.
+- ProSeries support remains limited to the 2025 Form 1040 preview and an attested local native profile. This release does not add ProSeries 1120S Send.
+
+### Preservation and validation
+
+- Candidate source descends from the published v0.2.76 source commit. The first extracted candidate retained all 2,022 baseline bridge files; bundled ATX and CCH resources matched the baseline byte for byte. The final rebuilt installer still needs an exact extracted-payload comparison and release manifest.
+- A synthetic new-client run wrote and read back 11 of 11 planned inputs across six K-1 and two W-2 copies, ran Full Calc, and reopened the saved return. ProSeries JavaScript mapping tests passed 274 of 274 after isolating a Windows generated-file line-ending comparison. This does not establish complete JSON coverage or all Form 1040 calculated-line parity.
+- The required full repository suite reported failures, including missing local Drake runtime, Drake mapping drift, and backend-version mismatches. The synthetic install/update check and release gate have not passed. This is a draft and has not been published.
+
+### Upgrade steps
+
+- After verification and publication, install the Windows x64 update and review the saved tax return in ProSeries before filing.
+
+### Known limitations
+
+- Complete 1040 JSON coverage and calculated-line reconciliation are not established. An unreadable saved-client file may conceal a tax-ID match; lookup warnings need review.
+- An undated annual estimated-tax total has no proved native ProSeries input route and stops before import.
+
 ## v0.2.76 - 2026-11-05 (Published)
 
 Previous production release: [v0.2.75](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.75).
