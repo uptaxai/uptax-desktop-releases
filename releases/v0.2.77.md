@@ -1,7 +1,7 @@
 ## v0.2.77 - 2026-11-11 (Draft)
 
 Previous production release: [v0.2.76](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.76).
-Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`, candidate `2e8e0d8071140037d1e1f08ccab6e01ab754025e`.
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `c3e1ca4bd38fac2ff1a424f90c36fab20c5806ee`, candidate `6e99db12a28a298e749de9c7771cd54a55feede8`.
 
 ### Added
 
@@ -12,6 +12,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 - New-client ProSeries Send creates a blank 1040 on the user's installation, waits until ProSeries saves a readable file, and restores the converted `.25I` so HomeBase registers the client.
 - Restore selects Form 1040 even when ProSeries last showed a different return type. The opener selects the 1040 HomeBase view before locating the exact saved return.
+- If the exact HomeBase row remains selected without opening, Send checks that ProSeries is still at HomeBase with no dialog or other return open, then tries the exact saved path through File > Open Client.
 - Saved-client lookup retries unreadable files, then skips any still unreadable file with a warning; an exact readable tax-ID match requires approval before update. Native copy setup recovers foreground focus and tolerates the observed form-label tooltip.
 - Lacerte Client Info navigation retries an absorbed tab click while retaining exact client and tax-ID verification.
 
@@ -24,9 +25,10 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Preservation and validation
 
 - Candidate source descends from the published v0.2.76 source. The exact v0.2.77 installer retains all 2,022 baseline bridge files; its bundled ATX and CCH resources match the baseline byte for byte. Extracted payload comparison found 63 added, 31 changed, and no removed paths, with a recorded review reason for every difference.
-- A synthetic new-client run wrote and read back 11 of 11 planned inputs across six K-1 and two W-2 copies, requested Full Calc, and reopened the saved return. Exact-source scoped checks passed: ProSeries 274/274, desktop 401 passed with 5 optional CCH skips, release tools 19/19, and pinned Lacerte producer checks 20/20. These results do not establish complete JSON coverage or all Form 1040 calculated-line parity.
-- Exact v0.2.77 installer SHA-256 is `d3c94d1dda33ae7ec5bde8f90d1b2125ffed26d8f00cf4f24744eb8cb84eaaff`; blockmap SHA-256 is `888710f62637eacb8f15ababbe08f8f350901c2a3d229a2c2efb0024a474b4c5`; `latest.yml` SHA-256 is `9d029733b4d745b3c9e058a05c599b949fbc0c928cb6c22f4ea7429a249d5f4e`. The package metadata check passed for these exact bytes.
-- The full repository suite has not passed (an earlier run recorded 557 passed, 8 failed). Inherited Drake failures and extension-only OLT failures are recorded separately from the Windows EXE release decision; they are not counted as passing tests. The exact v0.2.76-to-v0.2.77 synthetic install/update check and release gate passed. This remains a draft and has not been published.
+- An earlier synthetic new-client run wrote and read back 11 of 11 planned inputs across six K-1 and two W-2 copies, requested Full Calc, and reopened the saved return. The earlier source commit passed scoped checks: ProSeries 274/274, desktop 401 passed with 5 optional CCH skips, release tools 19/19, and pinned Lacerte producer checks 20/20. The new HomeBase fallback still needs exact-source checks.
+- Exact new installer SHA-256 is `6c9f4f9d001861a76482e8a8c455cc13357762375fdd19c714f0f7391ad44018`; blockmap SHA-256 is `00bac174b5512dedb7cc671d9ac0f88fd67288eb45b254f6b753e94ad01f5385`; `latest.yml` SHA-256 is `2dec2aa39dfcde1dd31b18901e771791c8944ff81ff275e2cc9ed747d4f2da65`. Package metadata passed and the exact payload was inventoried.
+- A diagnostic Send on this new build reached reopen but reported partial import: 34 of 34 planned inputs verified and 2 of 2 calculated checks verified, while 16 calculated checks require review, 24 candidate values remain, and 44 source items still need entry. Complete JSON coverage and calculated Form 1040 line parity remain unproven.
+- The full repository suite has not passed (an earlier run recorded 557 passed, 8 failed). Inherited Drake failures and extension-only OLT failures remain excluded from this Windows EXE decision, not counted as passes. The prior installer passed synthetic install/update and the release gate, and its assets were staged in an unpublished draft. Those results and staged assets do not apply to this rebuilt installer. This draft is **held** and has not been published.
 
 ### Upgrade steps
 
