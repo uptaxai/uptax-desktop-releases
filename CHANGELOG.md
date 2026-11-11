@@ -24,9 +24,9 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Preservation and validation
 
 - Candidate source descends from the published v0.2.76 source. The exact v0.2.77 installer retains all 2,022 baseline bridge files; its bundled ATX and CCH resources match the baseline byte for byte. Extracted payload comparison found 63 added, 31 changed, and no removed paths, with a recorded review reason for every difference.
-- A synthetic new-client run wrote and read back 11 of 11 planned inputs across six K-1 and two W-2 copies, ran Full Calc, and reopened the saved return. Earlier scoped ProSeries JavaScript mapping tests passed 274 of 274. This does not establish complete JSON coverage or all Form 1040 calculated-line parity; final-build scoped checks remain pending.
+- A synthetic new-client run wrote and read back 11 of 11 planned inputs across six K-1 and two W-2 copies, ran Full Calc, and reopened the saved return. Exact-source scoped checks passed: ProSeries 274/274, desktop 401 passed with 5 optional CCH skips, release tools 19/19, and pinned Lacerte producer checks 20/20. These results do not establish complete JSON coverage or all Form 1040 calculated-line parity.
 - Exact v0.2.77 installer SHA-256 is `d3c94d1dda33ae7ec5bde8f90d1b2125ffed26d8f00cf4f24744eb8cb84eaaff`; blockmap SHA-256 is `888710f62637eacb8f15ababbe08f8f350901c2a3d229a2c2efb0024a474b4c5`; `latest.yml` SHA-256 is `9d029733b4d745b3c9e058a05c599b949fbc0c928cb6c22f4ea7429a249d5f4e`. The package metadata check passed for these exact bytes.
-- The full repository suite has not passed. Inherited Drake failures and extension-only OLT failures are recorded separately from the Windows EXE release decision; they are not counted as passing tests. The synthetic install/update check and release gate remain pending. This is a draft and has not been published.
+- The full repository suite has not passed (an earlier run recorded 557 passed, 8 failed). Inherited Drake failures and extension-only OLT failures are recorded separately from the Windows EXE release decision; they are not counted as passing tests. The synthetic install/update check and release gate remain pending. This is a draft and has not been published.
 
 ### Upgrade steps
 
