@@ -1,4 +1,4 @@
-## v0.2.78 - 2026-11-12 (Draft)
+## v0.2.78 - 2026-11-12 (Published)
 
 Previous production: [v0.2.77](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.77), source `6e99db12a28a298e749de9c7771cd54a55feede8`.
 
