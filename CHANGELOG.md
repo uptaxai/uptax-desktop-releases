@@ -26,7 +26,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 - Candidate source descends from the published v0.2.76 source commit. The exact candidate4 installer retained all 2,022 baseline bridge files; bundled ATX and CCH resources matched the baseline byte for byte. Its extracted payload has 63 added, 31 changed, and no removed paths against v0.2.76; every difference has a recorded review reason.
 - A synthetic new-client run wrote and read back 11 of 11 planned inputs across six K-1 and two W-2 copies, ran Full Calc, and reopened the saved return. ProSeries JavaScript mapping tests passed 274 of 274 after isolating a Windows generated-file line-ending comparison. This does not establish complete JSON coverage or all Form 1040 calculated-line parity.
 - Exact candidate4 installer SHA-256 is `4926919edaf5a659444f579cd1e714ea327e3acc9536c3ca49e27764c15e4eb3`; blockmap SHA-256 is `4585f741955f38d4ed67386df7f94b43f67fe635ab22ba6b804b844ef3ea5efd`; `latest.yml` SHA-256 is `f0e1713d2a7c8ca752c89a7b1ad6e5fee55c2bbe7f330c7b11f2a3e5e3da67d2`. The package metadata check passed for these exact bytes.
-- The required full repository suite reported failures, including missing local Drake runtime, Drake mapping drift, and backend-version mismatches. The synthetic install/update check and release gate have not passed. This is a draft and has not been published.
+- The required full repository suite is still running and has reported failures, including a missing local Drake runtime, Drake mapping drift, and a missing OLT business-fixture generator. The synthetic install/update check and release gate have not passed. This is a draft and has not been published.
 
 ### Upgrade steps
 
