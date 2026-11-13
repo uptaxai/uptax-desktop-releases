@@ -1,83 +1,42 @@
-## v0.2.79 - 2026-11-13 (Draft candidate; not publish-ready)
+## v0.2.79 - 2026-11-14 (Draft, locally validated candidate)
 
 Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
-Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `5fb97745c6b3132d3db630111fa9100d68436bb7`.
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `e6d969fcbdc43565c974a5f995072e6165d249b5`.
 
 ### Added
 
-- Drake 2025 individual W-2 input covers 260 writable fields on the main,
-  additional-entry, and Ohio screens, including supported Box 12/14 and
-  state/local rows. Separate W2PR input covers 64 writable destinations,
-  without treating Puerto Rico withholding as federal W-2 withholding.
-- Sparse W-2c corrections update a uniquely matched saved original and retain
-  values that the correction omits.
-- Failed Send to Drake jobs write a fixed stage, code, and one actionable local
-  diagnostic. The shared desktop reporter queues one bounded, redacted failure
-  report and retries it through the authenticated session. The companion
-  backend draft adds a durable Telegram text alert for stored Drake failures.
+- Drake 2025 individual W-2 input covers 260 writable fields on the main, additional-entry, and Ohio screens, including supported Box 12/14 and state/local rows. Separate W2PR input covers 64 writable destinations without treating Puerto Rico withholding as federal W-2 withholding.
+- Sparse W-2c corrections update a uniquely matched saved original and retain omitted values.
+- Failed Send to Drake jobs write a fixed stage, stable code, and one actionable local diagnostic. The shared desktop reporter queues a bounded, redacted report through the authenticated session. The merged backend alert code stores an outbox task for a shared Telegram bot; Drake is the enabled alert provider.
 
 ### Fixed
 
-- Registration and readback distinguish a proven no-write result, verified
-  backup restoration, and an outcome requiring inspection in Drake. A verified
-  imported return that fails to open asks for manual opening without another
-  import. Importer exit and result status must agree before desktop success.
-- Drake shell creation requires a confirmed empty client search and retains
-  duplicate-client guards. Invalid or ambiguous source values are held for
-  review without replacing unrelated saved return values.
-- Native field guards protect W-2 state identifiers, localities, dividend and
-  mortgage names, foreign-country details, and taxpayer addresses while
-  retaining valid independent fields.
+- Registration and readback distinguish a proven no-write result, verified backup restoration, and an outcome requiring inspection in Drake. A verified imported return that fails to open asks for manual opening without another import. Importer exit and result status must agree before desktop success.
+- Drake shell creation requires a confirmed empty client search and retains duplicate-client guards. Invalid or ambiguous values remain for review without replacing unrelated saved return values.
+- Native field guards protect W-2 state identifiers, localities, dividend and mortgage names, foreign-country details, and taxpayer addresses while retaining valid independent fields.
 
 ### Changed or removed
 
-- Removed the suggestion to retry a Drake Send blindly after a possible
-  saved-return write. No supported tax year or return type is removed.
-- Drake support remains 2025. The previously shipped frontend, ATX, CCH,
-  Lacerte, ProSeries, and other bridge resources are byte-identical to v0.2.78.
-  Source-only OLT fixture tooling and Lacerte producer-contract test changes
-  are not included in the desktop payload.
+- Possible saved-return writes no longer prompt a blind retry. Drake support remains 2025; no supported tax year or return type is removed.
+- The previously shipped frontend, ATX, CCH, Lacerte, ProSeries, and other bridge resources are byte-identical to v0.2.78. Source-only OLT fixture tooling, Lacerte producer-contract tests, and Drake Online mapper safety repair are outside the desktop installer payload.
 
 ### Preservation and validation
 
-- The v0.2.78 source is an ancestor of the candidate; the latest merged
-  integration master is included. The actual published v0.2.78 and candidate
-  NSIS installers were extracted independently. Both contain 2,697 physical
-  files. The candidate has exactly 10 reviewed payload changes, one of them
-  the new Drake outcome module, with zero file removals or removed JSON leaves.
-  Every other resource, including mapping files, matches the published hash.
-- Candidate native .NET tests passed 1,095/1,095. Desktop npm tests passed
-  459, with five skips and zero failures. The final packaged dependency check,
-  CCH/ProSeries bundle proofs, and updater metadata check passed. A synthetic
-  failure executed through the final installer importer and reporter reached
-  a disposable backend and Telegram with one authenticated POST.
-- The first full `./run-tests.sh` completed with **579 ok, 57 failed, 0 skipped**.
-  A complete rerun with a pinned Lacerte backend and Django-capable Python
-  improved to **607 ok, 29 failed, 0 skipped**. One failure is inherited Drake
-  Online mapper drift; 28 are Lacerte producer, fixture, schema, or historical
-  backend-source checks. This remains a release gate failure. The exact frozen
-  installer passed a
-  synthetic per-user v0.2.78-to-v0.2.79 upgrade: all 2,697 shipped files
-  matched the tested payload, and the upgraded app reopened with the same
-  isolated profile after its updater-current check. No failed UpTax-button Send
-  reached a deployed backend. This candidate is therefore not yet publish-ready.
+- The v0.2.78 source and latest merged integration master are ancestors of this candidate. The actual published v0.2.78 installer and this candidate NSIS installer were extracted independently. Both contain 2,697 physical files; the candidate has exactly 10 reviewed payload changes, zero file removals, and zero removed JSON leaves. All other shipped mapping and runtime resource hashes match v0.2.78.
+- Native .NET tests passed 1,095/1,095; desktop npm tests passed 459 with five skips; Drake Online extension tests passed 22/22. The complete repository `./run-tests.sh` passed **637 top-level checks, 0 failures, 0 top-level skips** using reviewed current-schema and historical producer roots; two nested CCH Python checks skipped. Earlier failed suite runs are retained in the release evidence.
+- The exact final installer passed an isolated same-directory v0.2.78 to v0.2.79 per-user upgrade: all 2,697 installed shipped files matched the extracted package, the app reopened with the same synthetic profile, updater reported current, and the machine-wide v0.2.78 install remained intact. The final extracted EXE passed its 17-package runtime dependency check.
+- A packaged synthetic prewrite failure reached a disposable backend and Telegram through one authenticated POST. An authorized synthetic UpTax-button Send subsequently failed at Drake client-stage automation timeout, wrote a safe fixed-line diagnostic, and appeared once in the authenticated production staff failure list. This proves production report storage, not production Telegram delivery.
+- An earlier UpTax handoff-fetch timeout occurred before desktop IPC and created no job or report. That visibility gap remains. The native timeout identifies the exact immediate failure (45-second UI automation watchdog); the underlying UI automation stall has not been established. Do not retry that synthetic return without inspecting Drake.
 
 ### Upgrade steps
 
-- Do not publish or install this draft for customers yet. Before an eventual
-  release, deploy and configure the separately reviewed backend Telegram PR
-  if staff expect Telegram alerts. After a validated release, users should
-  review every imported return and manual-completion report before filing.
+- The candidate installer was built locally without publishing. Deploy and configure the merged backend Telegram alert code before staff depend on production bot notifications. Users should review every imported return and manual-completion report before filing.
 
 ### Known limitations
 
-- The backend Telegram PR is draft and not deployed; the provider-neutral bot
-  is configured only for isolated local verification. Current alert formatting
-  is Drake-only, and no desktop screenshot is transmitted.
-- W-2/W-2c/W2PR coverage is input mapping, not full federal reconciliation or
-  filing clearance. Ambiguous or unsupported facts remain manual review items.
-- The 29 remaining repository-suite failures still block the release gate. No
-  public update or EXE release has been created.
+- Production Telegram bot delivery is unproven because the merged backend code and bot settings are not deployed/configured in the target environment. Future integrations can use the same bot after their diagnostic and outcome policies are reviewed; only Drake alerts are enabled now. No desktop error screenshot is transmitted.
+- W-2/W-2c/W2PR coverage is input mapping, not full federal reconciliation or filing clearance. Ambiguous or unsupported facts remain manual review items.
+- No public update or EXE release has been created.
 
 ## v0.2.78 - 2026-11-12 (Published)
 
