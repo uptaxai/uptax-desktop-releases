@@ -54,9 +54,11 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 - The full `./run-tests.sh` completed with **579 ok, 57 failed, 0 skipped**.
   One failure is inherited Drake Online mapper drift; 56 are Lacerte producer,
   fixture, schema, or historical backend-source checks. This is a release gate
-  failure, not a passing regression run. A synthetic installer/update check is
-  pending Windows UAC approval. No failed UpTax-button Send reached a deployed
-  backend. This candidate is therefore not yet publish-ready.
+  failure, not a passing regression run. The exact frozen installer passed a
+  synthetic per-user v0.2.78-to-v0.2.79 upgrade: all 2,697 shipped files
+  matched the tested payload, and the upgraded app reopened with the same
+  isolated profile after its updater-current check. No failed UpTax-button Send
+  reached a deployed backend. This candidate is therefore not yet publish-ready.
 
 ### Upgrade steps
 
@@ -72,8 +74,8 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
   is Drake-only, and no desktop screenshot is transmitted.
 - W-2/W-2c/W2PR coverage is input mapping, not full federal reconciliation or
   filing clearance. Ambiguous or unsupported facts remain manual review items.
-- The 57 repository-suite failures and pending installation check block the
-  release gate. No public update or EXE release has been created.
+- The 57 repository-suite failures still block the release gate. No public
+  update or EXE release has been created.
 
 ## v0.2.78 - 2026-11-12 (Published)
 
