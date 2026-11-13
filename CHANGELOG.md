@@ -1,13 +1,14 @@
 ## v0.2.79 - 2026-11-14 (Draft, locally validated candidate)
 
 Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
-Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `e6d969fcbdc43565c974a5f995072e6165d249b5`.
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `ff7d3ffc189db07f59662c7b17fb5fe34487f29a`.
 
 ### Added
 
 - Drake 2025 individual W-2 input covers 260 writable fields on the main, additional-entry, and Ohio screens, including supported Box 12/14 and state/local rows. Separate W2PR input covers 64 writable destinations without treating Puerto Rico withholding as federal W-2 withholding.
 - Sparse W-2c corrections update a uniquely matched saved original and retain omitted values.
 - Failed Send to Drake jobs write a fixed stage, stable code, and one actionable local diagnostic. The shared desktop reporter queues a bounded, redacted report through the authenticated session. The merged backend alert code stores an outbox task for a shared Telegram bot; Drake is the enabled alert provider.
+- A confirmed pre-dispatch Drake handoff-history timeout can use the same desktop reporter with a fixed code and report-only job ID. Companion draft frontend [PR #38](https://github.com/uptaxai/uptax-frontend/pull/38) triggers it before claim or importer dispatch; backend [PR #77](https://github.com/uptaxai/uptax-backend/pull/77) renders its exact stage and cause in Telegram. Both must be deployed before this new path is active in production.
 
 ### Fixed
 
@@ -22,19 +23,20 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Preservation and validation
 
-- The v0.2.78 source and latest merged integration master are ancestors of this candidate. The actual published v0.2.78 installer and this candidate NSIS installer were extracted independently. Both contain 2,697 physical files; the candidate has exactly 10 reviewed payload changes, zero file removals, and zero removed JSON leaves. All other shipped mapping and runtime resource hashes match v0.2.78.
-- Native .NET tests passed 1,095/1,095; desktop npm tests passed 459 with five skips; Drake Online extension tests passed 22/22. The complete repository `./run-tests.sh` passed **637 top-level checks, 0 failures, 0 top-level skips** using reviewed current-schema and historical producer roots; two nested CCH Python checks skipped. Earlier failed suite runs are retained in the release evidence.
+- The v0.2.78 source and latest merged integration master are ancestors of this candidate. The actual published v0.2.78 installer and this candidate NSIS installer were extracted independently. Both contain 2,697 physical files; the candidate has exactly 11 reviewed payload changes, zero file removals, and zero removed JSON leaves. All other shipped mapping and runtime resource hashes match v0.2.78.
+- The current repository runner passed the Drake native solution; its prior standalone run passed 1,095/1,095 with no native source changes since. Desktop npm tests passed 462 with five skips; Drake Online extension tests passed 22/22 on unchanged extension source. The complete repository `./run-tests.sh` passed **637 top-level checks, 0 failures, 0 top-level skips** using reviewed current-schema and historical producer roots; two nested CCH Python checks skipped. Earlier failed suite runs are retained in the release evidence.
 - The exact final installer passed an isolated same-directory v0.2.78 to v0.2.79 per-user upgrade: all 2,697 installed shipped files matched the extracted package, the app reopened with the same synthetic profile, updater reported current, and the machine-wide v0.2.78 install remained intact. The final extracted EXE passed its 17-package runtime dependency check.
-- A packaged synthetic prewrite failure reached a disposable backend and Telegram through one authenticated POST. An authorized synthetic UpTax-button Send subsequently failed at Drake client-stage automation timeout, wrote a safe fixed-line diagnostic, and appeared once in the authenticated production staff failure list. This proves production report storage, not production Telegram delivery.
-- An earlier UpTax handoff-fetch timeout occurred before desktop IPC and created no job or report. That visibility gap remains. The native timeout identifies the exact immediate failure (45-second UI automation watchdog); the underlying UI automation stall has not been established. Do not retry that synthetic return without inspecting Drake.
+- An earlier candidate's packaged synthetic prewrite failure reached a disposable backend and Telegram through one authenticated POST. This probe was not repeated on the exact ff7d EXE. An authorized synthetic UpTax-button Send subsequently failed at Drake client-stage automation timeout, wrote a safe fixed-line diagnostic, and appeared once in the authenticated production staff failure list. This proves production report storage, not production Telegram delivery.
+- An earlier UpTax handoff-fetch timeout occurred before desktop IPC and created no job or report in the tested live version. The companion draft changes above cover this observed timeout after deployment; other pre-dispatch failures retain existing handling. The native timeout identifies the exact immediate failure (45-second UI automation watchdog); the underlying UI automation stall has not been established. Do not retry that synthetic return without inspecting Drake.
 
 ### Upgrade steps
 
-- The candidate installer was built locally without publishing. Deploy and configure the merged backend Telegram alert code before staff depend on production bot notifications. Users should review every imported return and manual-completion report before filing.
+- The candidate installer was built locally without publishing. Deploy and configure the merged backend Telegram alert code before staff depend on production bot notifications; the pre-dispatch timeout catalog also requires draft backend PR #77 and frontend PR #38 to pass their gates and be deployed. Users should review every imported return and manual-completion report before filing.
 
 ### Known limitations
 
 - Production Telegram bot delivery is unproven because the merged backend code and bot settings are not deployed/configured in the target environment. Future integrations can use the same bot after their diagnostic and outcome policies are reviewed; only Drake alerts are enabled now. No desktop error screenshot is transmitted.
+- The companion frontend PR #38 full `npm test` exited 1 with metadata/hash comparison failures and Vite port conflicts; its focused browser and build checks passed. The pre-dispatch production path remains unverified.
 - W-2/W-2c/W2PR coverage is input mapping, not full federal reconciliation or filing clearance. Ambiguous or unsupported facts remain manual review items.
 - No public update or EXE release has been created.
 
