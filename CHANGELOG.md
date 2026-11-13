@@ -1,3 +1,80 @@
+## v0.2.79 - 2026-11-13 (Draft candidate; not publish-ready)
+
+Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `5fb97745c6b3132d3db630111fa9100d68436bb7`.
+
+### Added
+
+- Drake 2025 individual W-2 input covers 260 writable fields on the main,
+  additional-entry, and Ohio screens, including supported Box 12/14 and
+  state/local rows. Separate W2PR input covers 64 writable destinations,
+  without treating Puerto Rico withholding as federal W-2 withholding.
+- Sparse W-2c corrections update a uniquely matched saved original and retain
+  values that the correction omits.
+- Failed Send to Drake jobs write a fixed stage, code, and one actionable local
+  diagnostic. The shared desktop reporter queues one bounded, redacted failure
+  report and retries it through the authenticated session. The companion
+  backend draft adds a durable Telegram text alert for stored Drake failures.
+
+### Fixed
+
+- Registration and readback distinguish a proven no-write result, verified
+  backup restoration, and an outcome requiring inspection in Drake. A verified
+  imported return that fails to open asks for manual opening without another
+  import. Importer exit and result status must agree before desktop success.
+- Drake shell creation requires a confirmed empty client search and retains
+  duplicate-client guards. Invalid or ambiguous source values are held for
+  review without replacing unrelated saved return values.
+- Native field guards protect W-2 state identifiers, localities, dividend and
+  mortgage names, foreign-country details, and taxpayer addresses while
+  retaining valid independent fields.
+
+### Changed or removed
+
+- Removed the suggestion to retry a Drake Send blindly after a possible
+  saved-return write. No supported tax year or return type is removed.
+- Drake support remains 2025. The previously shipped frontend, ATX, CCH,
+  Lacerte, ProSeries, and other bridge resources are byte-identical to v0.2.78.
+  Source-only OLT fixture tooling and Lacerte producer-contract test changes
+  are not included in the desktop payload.
+
+### Preservation and validation
+
+- The v0.2.78 source is an ancestor of the candidate; the latest merged
+  integration master is included. The actual published v0.2.78 and candidate
+  NSIS installers were extracted independently. Both contain 2,697 physical
+  files. The candidate has exactly 10 reviewed payload changes, one of them
+  the new Drake outcome module, with zero file removals or removed JSON leaves.
+  Every other resource, including mapping files, matches the published hash.
+- Candidate native .NET tests passed 1,095/1,095. Desktop npm tests passed
+  459, with five skips and zero failures. The final packaged dependency check,
+  CCH/ProSeries bundle proofs, and updater metadata check passed. A synthetic
+  failure executed through the final installer importer and reporter reached
+  a disposable backend and Telegram with one authenticated POST.
+- The full `./run-tests.sh` completed with **579 ok, 57 failed, 0 skipped**.
+  One failure is inherited Drake Online mapper drift; 56 are Lacerte producer,
+  fixture, schema, or historical backend-source checks. This is a release gate
+  failure, not a passing regression run. A synthetic installer/update check is
+  pending Windows UAC approval. No failed UpTax-button Send reached a deployed
+  backend. This candidate is therefore not yet publish-ready.
+
+### Upgrade steps
+
+- Do not publish or install this draft for customers yet. Before an eventual
+  release, deploy and configure the separately reviewed backend Telegram PR
+  if staff expect Telegram alerts. After a validated release, users should
+  review every imported return and manual-completion report before filing.
+
+### Known limitations
+
+- The backend Telegram PR is draft and not deployed; the provider-neutral bot
+  is configured only for isolated local verification. Current alert formatting
+  is Drake-only, and no desktop screenshot is transmitted.
+- W-2/W-2c/W2PR coverage is input mapping, not full federal reconciliation or
+  filing clearance. Ambiguous or unsupported facts remain manual review items.
+- The 57 repository-suite failures and pending installation check block the
+  release gate. No public update or EXE release has been created.
+
 ## v0.2.78 - 2026-11-12 (Published)
 
 Previous production: [v0.2.77](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.77), source `6e99db12a28a298e749de9c7771cd54a55feede8`.
