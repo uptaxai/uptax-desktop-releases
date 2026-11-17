@@ -7,7 +7,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  # GitHub hides draft releases from read-only tokens. The job only downloads
+  # frozen assets; it contains no release publication or promotion command.
+  contents: write
 
 jobs:
   install-update-startup:
