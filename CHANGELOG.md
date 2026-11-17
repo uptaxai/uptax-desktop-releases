@@ -1,3 +1,100 @@
+## v0.2.79 - 2026-11-17 (Draft; publication blocked)
+
+Previous production: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, actual built candidate `e862db0befbbefc4679fdae72826233e8d36a646`. Exact frontend backport `8fde036ea584439158436f9b23727311a6ce62a9` includes the stalled-reporter fix from PR #38; it is retained in that PR's ancestry.
+
+### Added
+
+- Drake 2025 individual W-2/W2PR coverage, sparse W-2c correction, and bounded failure reports through the authenticated desktop session, as described in the historical candidate notes below.
+- Draft-only Windows QA installs the actual published v0.2.78, upgrades the same directory using the frozen candidate, compares installed files, checks login rendering, and uninstalls on a disposable runner.
+
+### Fixed
+
+- Errors after importer process startup preserve the unknown import outcome. Prepared merged returns retain verification proof before registration resets it.
+- A stalled optional diagnostic report no longer prevents the confirmed no-dispatch timeout result from appearing or the busy state from clearing.
+- The preserved-payload build recipe now includes the reviewed importer-process runtime overlay and the exact corrected shipped-UI backport.
+
+### Changed or removed
+
+- Both independently extracted installers contain 2,697 physical files. Sixteen explained payload differences replace the generated frontend main asset, update desktop outcome/reporting code and native importer binaries, and record version/provenance. No JSON leaves were removed. Other frontend assets and bridge resources match v0.2.78.
+- No public update channel was promoted. The old f607951d installer and its results below are superseded historical evidence only.
+
+### Preservation and validation
+
+- Candidate EXE: 185,489,548 bytes, SHA-256 `fe0eb6b43cf35dea2aed22a86ea4b3f953a451414960b9c5ee2a326879d8b11d`.
+- Blockmap: 194,334 bytes, SHA-256 `fbc84d3f3cfca2bfe155a32baf3714e9fafea20d88594985b508e47e0d0a5d32`.
+- latest.yml: 342 bytes, SHA-256 `dc40fb765a2b2390e2e275518e956adefd31b487fd59c237e1388d436d87b7b4`.
+- Exact candidate packaging, updater metadata, x64 checks and 17 runtime dependency checks passed. Frozen manifest SHA-256: `79e41956b73b3d18c964cefc62c331f6082afb7be9a58a507effc67f7748537a`. Its pending install status records build time; the subsequent independent Windows report is authoritative for QA.
+- [Windows QA run 44098195399](https://github.com/uptaxai/uptax-desktop-releases/actions/runs/44098195399) passed: 2,697 baseline and upgraded installed files matched, version 0.2.79.0/x64 verified, login rendered, uninstall completed. The earlier run failed at draft asset access before installation; workflow token permissions were corrected.
+- Native importer tests: 1,103 passed. Shipped-UI backport: 2,295 passed, one skipped. Current frontend PR #38: 2,546 Node tests passed, one skipped; Vitest 455 passed, 21 skipped; forced TypeScript and focused timeout browser passed.
+- The broader repository run remained non-green: 513 top-level checks passed, 123 failed, one ATX-offline suite skipped. Missing licensed Lacerte sheets account for most failures. Current producer probes were subsequently repaired and passed five checks with two unavailable historical-checkout cases skipped; that focused pass does not clear the full gate. Later validation-only source commits do not change the binary's built-source identity.
+
+### Upgrade steps
+
+- None for users while draft. Before publication, resolve and rerun the full source gate, reconcile the current production baseline, and run the source release verifier against the exact frozen assets. Preserve the tested bytes; a rebuild requires new validation and hashes.
+- Production Telegram delivery still requires independently verified backend deployment, migrations, bot settings and worker state.
+
+### Known limitations
+
+- Publication remains blocked by the non-green source gate. Windows package QA does not establish complete tax reconciliation, live production Send, or production bot delivery.
+- The frozen-plan verifier was run after QA and rejected publication with `Missing passing evidence: source-tests`; asset hashes, production baseline and payload comparison were checked before that failure.
+- Retained K1PA screens 406â€“414 in separate importer PR #233 lack a supported ordinary UI route and remain unverified; this candidate does not certify that separate feature.
+- Draft assets are not a published release. The public production channel remains v0.2.78.
+
+
+## Superseded candidate evidence (f607951d; retained for audit)
+
+## v0.2.79 - 2026-11-14 (Draft, publication blocked after review)
+
+Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `f607951de775a622d3f8501dd63fe6966bf2a5ff`. The bundled UI backport is frontend `f15057c38108b8d15035809d0b00e0a0ad57deb9` from shipped frontend `db3ad80ea806299febfd47bf88c622a37336a483`.
+
+### Added
+
+- Drake 2025 individual W-2 input covers 260 writable fields on the main, additional-entry, and Ohio screens, including supported Box 12/14 and state/local rows. Separate W2PR input covers 64 writable destinations without treating Puerto Rico withholding as federal W-2 withholding.
+- Sparse W-2c corrections update a uniquely matched saved original and retain omitted values.
+- Failed Send to Drake jobs write a fixed stage, stable code, and one actionable local diagnostic. The shared desktop reporter queues a bounded, redacted report through the authenticated session. The merged backend alert code stores an outbox task for a shared Telegram bot; Drake is the enabled alert provider.
+- A confirmed pre-dispatch Drake handoff-history timeout uses the same desktop reporter with a fixed code and report-only job ID. This installer bundles the original one-click UI backport from the exact shipped frontend source. Current-main frontend [PR #38](https://github.com/uptaxai/uptax-frontend/pull/38) carries that reporting change and a subsequent fix absent from this installer; backend [PR #77](https://github.com/uptaxai/uptax-backend/pull/77) renders its exact stage and cause in Telegram. Production Telegram alerts for this code require that backend change and server configuration.
+
+### Fixed
+
+- Registration and readback distinguish a proven no-write result, verified backup restoration, and an outcome requiring inspection in Drake. A verified imported return that fails to open asks for manual opening without another import. Importer exit and result status must agree before desktop success.
+- Drake shell creation requires a confirmed empty client search and retains duplicate-client guards. Invalid or ambiguous values remain for review without replacing unrelated saved return values.
+- Native field guards protect W-2 state identifiers, localities, dividend and mortgage names, foreign-country details, and taxpayer addresses while retaining valid independent fields.
+- Read-only Drake window timeouts now name the exact stalled operation: client readiness, the home check before safe shutdown, or main-window identification before return registration. The fixed code and message are safe for the local diagnostic and reviewed Telegram alert. The code does not infer why Drake's UI Automation provider stalled; safe-close failures keep possible client-shell changes visible.
+
+### Changed or removed
+
+- Possible saved-return writes no longer prompt a blind retry. Drake support remains 2025; no supported tax year or return type is removed.
+- The shipped frontend main JS asset, index.html, and bundle provenance change together for the timeout report. All other frontend assets, ATX, CCH, Lacerte, ProSeries, and other bridge resources are byte-identical to v0.2.78. Source-only OLT fixture tooling, Lacerte producer-contract tests, and Drake Online mapper safety repair are outside the desktop installer payload.
+
+### Preservation and validation
+
+- The results and hashes below describe the frozen `f607951d` installer only. They remain historical evidence for those bytes, not proof that the 2026-11-17 review fixes are packaged or that publication is ready. No installer was rebuilt or launched during this review.
+- The v0.2.78 source and latest merged integration master are ancestors of this candidate. The actual published v0.2.78 installer and this candidate NSIS installer were extracted independently. Both contain 2,697 physical files; the candidate has exactly 15 reviewed payload differences: 12 changed, two added, and one removed generated UI asset filename replaced by the new main JS bundle. No JSON leaves were removed. All other shipped mapping and runtime resource hashes match v0.2.78.
+- The final f607 exact-source `./run-tests.sh` exited 0 with **637 top-level checks, 0 failures, 0 top-level skips** using Python 3.12 and reviewed current-schema and historical producer roots; the nested CCH Python suite reported two skips. Standalone Drake .NET passed **1,102/1,102**, desktop npm passed **463** with **five skips**, and the isolated synthetic Windows UIA/background harness passed **32** scenarios with foreground unchanged. The clean shipped-UI backport passed 2,295 frontend tests with one skip. The initial diagnostic worktree run stopped after 456 passes and four setup failures before dependencies/catalog were synchronized; the corrected exact-source run passed. Earlier failed suite runs remain in the release evidence.
+- The exact frozen f607 installer (185,489,677 bytes; SHA-256 `64b7b8e331fd3d89934e7f48222844045d31cfb3b31dcdbbc540aa7ab191b071`) passed updater-metadata, Windows x64 PE, and extracted 17-package dependency checks. Its blockmap SHA-256 is `e882df834fc732500627d060b721c6c041ae64e80ae582ac7a117d29683371fe`; `latest.yml` SHA-256 is `803ec6d2365a6d60b23cc8edb7fa4b1a3cbba3ade2e3a2a7e7b37e43e920d43a`. The isolated same-directory v0.2.78 to v0.2.79 per-user upgrade and installed-byte comparison passed: all 2,697 installed shipped files matched, with only the generated uninstaller extra. The corrected synthetic helper then exited 0 after isolated uninstall. Two earlier helper runs had returned an array of status text plus the EXE path and falsely reported that the removed EXE remained; the target directory had disappeared, and a fresh path-only rerun confirmed cleanup. After the user explicitly authorized direct launch, the frozen extracted f607 EXE started in a fresh isolated profile: ProductVersion 0.2.79.0, responsive main window, local bundled `/login` page loaded twice, and clean window close. The same exact candidate was then reopened with the isolated signed-in profile; its authenticated staff list returned row 187 for the prior synthetic Drake `client` timeout with an error line matching the local diagnostic. No new Send was attempted. These checks prove startup and stored-report visibility, not production Telegram delivery or a live failure with the new precise timeout codes.
+- An earlier candidate's packaged synthetic prewrite failure reached a disposable backend and Telegram through one authenticated POST. An authorized synthetic UpTax-button Send subsequently failed at Drake client-stage automation timeout, wrote a safe fixed-line diagnostic, and appeared once in the authenticated production staff failure list. That proves production report storage, not production Telegram delivery. Separately, the current backend draft head `0db28f87d` passed an opt-in synthetic CI POST to outbox to worker to real Telegram probe at [run 43575874175](https://github.com/uptaxai/uptax-backend/actions/runs/43575874175), 1/1; the dedicated test bot credentials are permanent environment-scoped Actions secrets. No production backend deploy was performed in this work; any external deployment remains unverified.
+- The exact frozen f607 packaged importer was run with a synthetic missing transfer, which failed before Drake dispatch at `preflight` with `TRANSFER_NOT_FOUND` and a fixed local diagnostic free of transfer content. The exact packaged desktop reporter made one authenticated CSRF POST to a disposable backend, drained its queue, appeared once in the staff failure list, and the outbox worker received Telegram HTTP 200. The isolated SQLite test passed 1/1; an unrelated board-summary queue signal logged a SQLite syntax error during setup. This proves the candidate bytes through the test backend and bot, not production bot delivery or the historical Drake UIA stall cause.
+- An earlier UpTax handoff-fetch timeout occurred before desktop IPC and created no job or report in the tested live version. The packaged UI backport and desktop bridge cover this specific timeout synthetically; a live repetition in the exact candidate is unverified. Other pre-dispatch failures retain existing handling. The native timeout identifies the exact immediate failure (45-second UI automation watchdog); the underlying UI automation stall has not been established. A read-only native lookup after the failure found one registered synthetic shell whose saved bytes differ from the generated staging package. That check does not establish which values were saved. Inspect the return in Drake before any retry; no second Send was run.
+
+- A later read-only STA UI Automation probe of the exact running Drake process timed out after 12 seconds on its first observation and completed in about four seconds on its second. Home Open/Create was disabled while a return window was active. No UI input, import, save, logout, or screenshot occurred. This supports intermittent UI Automation responsiveness with an open return; it does not identify the historical timed-out call or Drake's internal cause.
+
+### Upgrade steps
+
+- Publication is blocked pending a replacement candidate incorporating integrations [review fix `82a7ce43391ddb4da6695bdcaeacd0f36f944d8b`](https://github.com/uptaxai/uptax-integrations/commit/82a7ce43391ddb4da6695bdcaeacd0f36f944d8b) and a reviewed shipped-UI backport of frontend [fix `a9b8e617`](https://github.com/uptaxai/uptax-frontend/commit/a9b8e617). Build from the resulting exact committed sources; repeat source, packaged regression, inventory/preservation, startup and applicable install/update checks; freeze new asset hashes and a new manifest. Rerun the release verifier against the then-current production baseline immediately before any separately authorized publication. Do not relabel the old installer or reuse its test evidence for new bytes.
+- Backend draft [PR #77](https://github.com/uptaxai/uptax-backend/pull/77) now includes a bounded recovery command for Telegram alerts stopped by a permanent API rejection. After correcting bot settings, an operator previews 1Ã¢â‚¬â€œ20 explicit outbox IDs with `requeue_stopped_transfer_failure_alerts --alert-id <id>` and adds `--apply` only for eligible rows; sent alerts and attempt history are preserved. [Current-head CI run 43575134827](https://github.com/uptaxai/uptax-backend/actions/runs/43575134827) passed 51 PostgreSQL-backed focused tests with deployment skipped. An intermediate run 43572826500 stopped at inherited OpenAPI drift before tests; the merged backend main and a reviewed two-field schema sync resolved it. This is a recovery option, not evidence that the production worker or bot is active.
+- The candidate installer was built locally without publishing. Confirm the merged backend Telegram alert code and migration 0123 are deployed, configure the server bot settings, and verify the worker before staff depend on production bot notifications; the pre-dispatch timeout alert catalog also requires draft backend PR #77. Current-main frontend PR #38 should pass review before subsequent frontend builds. Users should review every imported return and manual-completion report before filing.
+
+### Known limitations
+
+- The frozen installer contains two bugs confirmed in importer PR #194 on 2026-11-17: an error emitted after the importer process starts can be misclassified as a proven no-import result, and fresh registration of a prepared merged return can discard its merge proof before verification, rejecting valid preserved records. Both are fixed in `82a7ce43`; the old installer does not contain those fixes.
+- The frozen frontend backport `f15057c3` awaits the optional diagnostic reporter before displaying a confirmed no-dispatch timeout. A reporter that never settles can leave the panel busy indefinitely. Frontend PR #38 fixes this in `a9b8e617`; it must be backported and packaged, rather than assuming the current-main source fix changes the frozen installer. Its synthetic stalled-reporter browser regression failed before the fix and passed afterward with no send or backend write; forced TypeScript and 10 focused handoff checks passed. Broader current-main checks remain non-green and are not release evidence.
+- Production Telegram bot delivery is unproven: the deployed backend revision, migration 0123, bot settings, and worker status have not been verified in the target environment. Future integrations can use the same bot after their diagnostic and outcome policies are reviewed; only Drake alerts are enabled now. No desktop error screenshot is transmitted.
+- The bundled shipped-UI backport's full `npm test` passed: 2,295 passed, zero failed, one skipped. Seven test-only Windows CRLF corrections resolved 11 failures reproduced on untouched shipped frontend source; focused browser and build checks passed. Current-main frontend PR #38 now includes equivalent test-only fixes and latest main `4d085553`: forced TypeScript and the synthetic pre-dispatch browser check passed at head `0064d04d`; full `npm test` had 2,437 passed, two inherited current-main checks failed, and one skipped. A separate Vitest run had 94 passed, one inherited Maryland member-percentage failure, and one skipped. The pre-dispatch production path remains unverified.
+- W-2/W-2c/W2PR coverage is input mapping, not full federal reconciliation or filing clearance. Ambiguous or unsupported facts remain manual review items.
+- No public update or EXE release has been created.
+
 ## v0.2.78 - 2026-11-12 (Published)
 
 Previous production: [v0.2.77](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.77), source `6e99db12a28a298e749de9c7771cd54a55feede8`.
