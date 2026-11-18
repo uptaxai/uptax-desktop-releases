@@ -1,3 +1,41 @@
+## v0.2.80 - 2026-11-18 (Draft; release validation in progress)
+
+Previous production: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `9f1580a6d4ec35cdd7f99c8108780329e3204190`. The bundled UI is reviewed frontend `1c4984a0b6d84b027f38e031081465ec5d6d79d8`.
+
+### Added
+
+- Drake Tax 2025 W-2 and W2PR inputs, including guarded sparse W-2c updates, from the reviewed 0.2.79 candidate. Unsupported and ambiguous facts remain for manual review.
+- Fixed-stage, fixed-code Drake failure diagnostics in the local job folder and one bounded, redacted report per failed job through the existing authenticated desktop queue. Staff can inspect the corresponding backend failure row when its report is delivered.
+
+### Fixed
+
+- Drake client creation enters and verifies its ID confirmation before selecting the return type, waits for New Return to close after Create, and records a specific client-stage refusal when Drake keeps it open.
+- Native registration preserves backup/restore and duplicate-client guards, reports an unknown saved-return outcome when verification is impossible, and treats an opening failure after verified import as a manual-open warning.
+- The desktop reconciles native result and process exit, retains the handoff journal's pre-dispatch versus post-dispatch distinction, and keeps offline/concurrent failure reports in the shared queue.
+- The packaged Drake validator now matches its recorded source. The published 0.2.78 bridge omitted the typed-source mutation witness present at its source commit; this candidate restores it.
+
+### Changed or removed
+
+- Removed behavior: suggesting a blind repeat Send when a Drake write may have changed a return. No desktop provider, supported form, tax year, or mapping asset is intentionally removed. The desktop Drake target remains tax year 2025.
+- The bundled UI assets have new content hashes from the reviewed frontend revision. Drake Online browser-extension mapping changes in the source diff are not part of this Windows EXE.
+
+### Preservation and validation
+
+- The v0.2.78 source is an ancestor. The exact final EXE contains 2,697 physical files and 19 explained payload differences, with no removed JSON leaves; 2,110 bridge files retain published bytes, and the sole changed bridge is the reviewed Drake validator.
+- Drake .NET tests passed 1,590/1,590 and desktop npm tests passed 465 with five skips. A live synthetic Send on the earlier installed candidate reached a scoped staff failure row; a second Send to its verified existing synthetic shell completed registration/readback without a new failure. This does not prove the later client-creation fix in the final EXE.
+- The final-source `./run-tests.sh` passed 637 top-level checks with no failures or top-level skips. The exact final installer passed `npm run release:check` and its independent extracted-payload comparison. Installation and the release verifier remain pending. No public update has been promoted.
+- Frozen final assets: EXE 185,732,153 bytes, SHA-256 `a0a75959edeb35a00272e6a8c6ce55baf205f4b6caa67d8eac276fc91b47a2eb`; blockmap 194,552 bytes, SHA-256 `4fb81dcc1ffa8a925b847514b794ed2ff7beed94edee836828db37f3faed621b`; `latest.yml` 342 bytes, SHA-256 `de7a69379f10097b3ea4e6d50b26b12f703cb56d27fb816f8274a8ca86edc708`.
+
+### Upgrade steps
+
+- After the release gate passes, install this Windows x64 update over v0.2.78. Review the imported return before filing. Drake may require a fresh sign-in after UpTax closes it for safe registration; open a verified saved return manually if the opening step warns.
+
+### Known limitations
+
+- Production Telegram delivery requires the separate backend alert catalog, migrations, bot settings, and worker. The backend draft is not deployed; the isolated synthetic Telegram CI probe is queued. No raw Drake or return screenshot is uploaded.
+- The final EXE has not yet passed a new-client live synthetic Send or the final release verifier. The installer is unsigned by the maintained build configuration. This draft entry is not a publication claim.
+
 ## v0.2.79 - 2026-11-17 (Draft; publication blocked)
 
 Previous production: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
