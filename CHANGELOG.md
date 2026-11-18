@@ -1,3 +1,43 @@
+## v0.2.81 - 2026-11-18 (Draft; publication blocked)
+
+Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `9eaecde0222a8b72aacf1e9fa9ad4d1d4ed2cf0d`.
+Bundled frontend: [uptaxai/uptax-frontend](https://github.com/uptaxai/uptax-frontend), commit `a2fc4a85ce336777467d7c8ed0dfdbcc7ac55f7f`.
+Versions 0.2.79 and 0.2.80 were unpublished candidates; their changes below are part of this production-to-candidate review.
+
+### Added
+
+- Drake 2025 individual W-2 and W2PR mapping coverage and guarded W-2c updates from the preceding candidates.
+- One bounded, redacted failed-Send report per job through the existing authenticated desktop session, with an offline queue and backend staff list. The separate backend Telegram worker uses the shared bot; this EXE does not transmit screenshots.
+- Send to ProSeries stays visible in the return menu and Export view even when its verified profile is unavailable. It shows the specific reason and stays disabled until the installed API is proven. Current frontend business workpaper, owner, document and Review UI changes are included.
+
+### Fixed
+
+- Drake client creation now preserves the New Return dialog's visibility when Drake replaces its window handle. A still-open dialog yields `DRAKE_CREATE_NOT_ACCEPTED` at the client stage; the bounded outer helper wait lets the post-Create check finish. The message does not claim a client shell was saved or recommend an uninspected retry.
+- The preceding candidates' confirmed pre-dispatch versus unknown-after-dispatch outcomes, duplicate-client guard, backup restoration and saved-return readback remain in the importer. A verified import that cannot open the return asks for manual opening.
+
+### Changed or removed
+
+- No supported Drake tax year, return type or mapped resource is intentionally removed. ProSeries button visibility does not enable unsupported packages or bypass its container API check.
+- The generated frontend JS/CSS asset names changed with the pinned bundled UI. The previous packaged resources are checked against the extracted candidate payload.
+
+### Preservation and validation
+
+- v0.2.78 source is an ancestor of the candidate. The installer has 2,697 extracted physical files; comparison found 19 payload differences and no removed JSON leaves. The build preserved 1,889 unchanged bridge bytes. Every difference still requires a written reason in the final release manifest.
+- Candidate EXE: 185,739,907 bytes, SHA-256 `a8daa57ee28fb47982a741e227f85a11e1c52c2dc88c72fe25eabfa250601039`. Blockmap: 194,290 bytes, SHA-256 `d5814c814309afd1ca68fe24a47031c77a4b9ae131b36df56564324301076376`. `latest.yml`: 342 bytes, SHA-256 `b5d52e54a46ea304fc8fbc74fe47c497949aea2abbf92344bede0b0905a6c83b`; its SHA-512 matches the EXE.
+- Drake .NET tests passed 1,590/1,590; desktop tests passed 465 with five skips; frontend tests passed 2,563 Node and 595 Vitest checks with 22 skips; TypeScript and focused ProSeries browser checks passed. Nineteen release-gate synthetic tests passed. The isolated Windows client-creation fixture passed five return types, ID refusals and a replaced dialog with foreground unchanged. A separate full Windows harness run hit its five-minute limit in a later post-import filter and is not a pass.
+- Final-commit full repository run, installed-candidate verification, live Drake Send, authenticated failure-row check for the latest failed job, production Telegram delivery and final exact-artifact release verifier are pending. The extracted importer smoke passed Drake and ATX preflight; this does not prove a live import in either product.
+
+### Upgrade steps
+
+- After the release gate passes, install the Windows x64 update over v0.2.78. Sign in to Drake if required, review the imported return and reconcile totals before filing. Inspect Drake before repeating any Send whose saved-return outcome is uncertain.
+
+### Known limitations
+
+- The installed 0.2.80 Send stopped during client creation with New Return open; the vendor's exact reason for leaving the dialog open is still unknown. This 0.2.81 build must prove a successful live import before publication.
+- The installed ProSeries container API hash differs from the reviewed profile, so ProSeries Send remains disabled pending fresh synthetic proof.
+- The bot token/chat and alert worker on the target production backend are not verified. The separate backend draft offers a privacy-safe diagnostic photo card, not a raw Drake or UpTax screenshot.
+
 ## v0.2.79 - 2026-11-17 (Draft; publication blocked)
 
 Previous production: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
