@@ -1,4 +1,4 @@
-## v0.2.80 - 2026-11-18 (Draft; release validation in progress)
+## v0.2.80 - 2026-11-18 (Draft; exact installer verified)
 
 Previous production: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
 Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `9f1580a6d4ec35cdd7f99c8108780329e3204190`. The bundled UI is reviewed frontend `1c4984a0b6d84b027f38e031081465ec5d6d79d8`.
@@ -24,7 +24,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 - The v0.2.78 source is an ancestor. The exact final EXE contains 2,697 physical files and 19 explained payload differences, with no removed JSON leaves; 2,110 bridge files retain published bytes, and the sole changed bridge is the reviewed Drake validator.
 - Drake .NET tests passed 1,590/1,590 and desktop npm tests passed 465 with five skips. A live synthetic Send on the earlier installed candidate reached a scoped staff failure row; a second Send to its verified existing synthetic shell completed registration/readback without a new failure. This does not prove the later client-creation fix in the final EXE.
-- The final-source `./run-tests.sh` passed 637 top-level checks with no failures or top-level skips. The exact final installer passed `npm run release:check` and its independent extracted-payload comparison. Installation and the release verifier remain pending. No public update has been promoted.
+- The final-source `./run-tests.sh` passed 637 top-level checks with no failures or top-level skips. The exact final installer passed `npm run release:check`, independent extraction, isolated per-user installation, and installed-app startup. Its installed payload matched the extracted EXE except for the expected uninstaller. The source release verifier passed against the frozen hashes and inventories. An over-the-top update from v0.2.78 was not exercised locally. No public update has been promoted.
 - Frozen final assets: EXE 185,732,153 bytes, SHA-256 `a0a75959edeb35a00272e6a8c6ce55baf205f4b6caa67d8eac276fc91b47a2eb`; blockmap 194,552 bytes, SHA-256 `4fb81dcc1ffa8a925b847514b794ed2ff7beed94edee836828db37f3faed621b`; `latest.yml` 342 bytes, SHA-256 `de7a69379f10097b3ea4e6d50b26b12f703cb56d27fb816f8274a8ca86edc708`.
 
 ### Upgrade steps
@@ -34,7 +34,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Known limitations
 
 - Production Telegram delivery requires the separate backend alert catalog, migrations, bot settings, and worker. The backend draft is not deployed; the isolated synthetic Telegram CI probe is queued. No raw Drake or return screenshot is uploaded.
-- The final EXE has not yet passed a new-client live synthetic Send or the final release verifier. The installer is unsigned by the maintained build configuration. This draft entry is not a publication claim.
+- The final EXE has not yet passed a new-client live synthetic Send. The installer is unsigned by the maintained build configuration. This draft entry is not a publication claim.
 
 ## v0.2.79 - 2026-11-17 (Draft; publication blocked)
 
