@@ -1,55 +1,95 @@
-name: Candidate 0.2.79 Windows QA
+# Test-only branch copy for the workflow path already registered on main.
+# Dispatch this branch with --ref; never merge this override into main.
+name: Candidate Windows QA
 
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/candidate-0279-windows-qa.yml'
   workflow_dispatch:
 
 permissions:
-  # GitHub hides draft releases from read-only tokens. The job only downloads
-  # frozen assets; it contains no release publication or promotion command.
-  contents: write
+  contents: read
+  actions: read
 
 jobs:
-  install-update-startup:
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: windows-latest
-    timeout-minutes: 20
+  exact-assets:
+    # Register this one-use runner with the custom label only for this QA run.
+    # It reads three pinned files and never executes the installer on this PC.
+    runs-on: [self-hosted, windows, x64, uptax-exact-upload]
+    timeout-minutes: 10
     steps:
-      - name: Download the exact unpublished candidate and production baseline
+      - name: Check out the reviewed asset pins
+        uses: actions/checkout@v4
+      - name: Copy the exact tested bytes into a short-lived workflow artifact
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $source = $env:UPTAX_QA_ASSET_DIR
+          if (!$source -or ![IO.Path]::IsPathFullyQualified($source)) { throw 'Absolute QA asset directory required on the ephemeral runner.' }
+          $pins = Get-Content -LiteralPath '.github/scripts/candidate-windows-qa-pins.json' -Raw | ConvertFrom-Json
+          if ($pins.schemaVersion -ne 1 -or $pins.candidate.version -notmatch '^\d+\.\d+\.\d+$' -or
+              $pins.candidate.sourceCommit -notmatch '^[a-f0-9]{40}$' -or $pins.candidate.assets.Count -ne 3) { throw 'Invalid reviewed QA pins.' }
+          $expectedNames = @("UpTax-Setup-$($pins.candidate.version).exe",
+              "UpTax-Setup-$($pins.candidate.version).exe.blockmap", 'latest.yml')
+          for ($i=0; $i -lt 3; $i++) {
+            if ($pins.candidate.assets[$i].name -ne $expectedNames[$i]) { throw 'Unexpected candidate asset name.' }
+          }
+          $destination = Join-Path $env:RUNNER_TEMP 'uptax-exact-assets'
+          if (Test-Path -LiteralPath $destination) { throw 'Refusing to reuse an asset directory.' }
+          New-Item -ItemType Directory -Path $destination | Out-Null
+          foreach ($asset in $pins.candidate.assets) {
+            if ($asset.sha256 -notmatch '^[a-f0-9]{64}$' -or $asset.size -le 0) { throw 'Invalid asset pin.' }
+            $file = Join-Path $source $asset.name
+            if (!(Test-Path -LiteralPath $file -PathType Leaf) -or (Get-Item -LiteralPath $file).Length -ne $asset.size -or
+                (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLowerInvariant() -ne $asset.sha256) { throw 'Frozen QA asset differs.' }
+            $copy = Join-Path $destination $asset.name
+            Copy-Item -LiteralPath $file -Destination $copy
+            if ((Get-FileHash -LiteralPath $copy -Algorithm SHA256).Hash.ToLowerInvariant() -ne $asset.sha256) { throw 'Copied QA asset differs.' }
+          }
+      - name: Retain the exact bytes only for this workflow run
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-exact-assets
+          path: ${{ runner.temp }}/uptax-exact-assets/*
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+  install-update-startup:
+    needs: exact-assets
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the reviewed QA helper
+        uses: actions/checkout@v4
+      - name: Download exact bytes from the same workflow run
+        uses: actions/download-artifact@v4
+        with:
+          name: candidate-exact-assets
+          path: ${{ runner.temp }}/candidate
+      - name: Download the published production baseline
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           $ErrorActionPreference = 'Stop'
           $repo = '${{ github.repository }}'
-          $latest = gh api "repos/$repo/releases/latest" --jq .tag_name
-          if ($LASTEXITCODE -ne 0 -or $latest -ne 'v0.2.78') { throw 'Production baseline changed.' }
-          $draft = gh release view v0.2.79 --repo $repo --json isDraft --jq .isDraft
-          if ($LASTEXITCODE -ne 0 -or $draft -ne 'true') { throw 'Expected an unpublished candidate.' }
-          $candidate = Join-Path $env:RUNNER_TEMP 'candidate'
+          $pins = Get-Content -LiteralPath '.github/scripts/candidate-windows-qa-pins.json' -Raw | ConvertFrom-Json
+          if ($pins.baseline.tag -notmatch '^v\d+\.\d+\.\d+$' -or
+              $pins.baseline.installerName -ne "UpTax-Setup-$($pins.baseline.tag.Substring(1)).exe") { throw 'Invalid baseline pin.' }
+          $latest = gh api "repos/$repo/releases/latest" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0 -or $latest.id -ne $pins.baseline.releaseId -or $latest.tag_name -ne $pins.baseline.tag) { throw 'Production baseline changed.' }
           $baseline = Join-Path $env:RUNNER_TEMP 'baseline'
-          New-Item -ItemType Directory -Path $candidate,$baseline | Out-Null
-          gh release download v0.2.79 --repo $repo --dir $candidate --pattern 'UpTax-Setup-0.2.79.exe' --pattern 'UpTax-Setup-0.2.79.exe.blockmap' --pattern 'latest.yml' --pattern 'candidate-manifest.json' --pattern 'test-candidate-windows.ps1'
-          if ($LASTEXITCODE -ne 0) { throw 'Candidate download failed.' }
-          gh release download v0.2.78 --repo $repo --dir $baseline --pattern 'UpTax-Setup-0.2.78.exe'
+          New-Item -ItemType Directory -Path $baseline | Out-Null
+          gh release download $pins.baseline.tag --repo $repo --dir $baseline --pattern $pins.baseline.installerName
           if ($LASTEXITCODE -ne 0) { throw 'Baseline download failed.' }
-          $pins = @{
-            'candidate-manifest.json' = '79e41956b73b3d18c964cefc62c331f6082afb7be9a58a507effc67f7748537a'
-            'test-candidate-windows.ps1' = '8960780a77591a4af55970587c11ca04377c23c3ab259b135a78cd7291494c7c'
-          }
-          foreach ($name in $pins.Keys) {
-            if ((Get-FileHash -LiteralPath (Join-Path $candidate $name) -Algorithm SHA256).Hash.ToLowerInvariant() -ne $pins[$name]) { throw 'Frozen QA input differs.' }
-          }
       - name: Verify install, same-directory upgrade, login startup, and uninstall
         shell: pwsh
         run: |
-          & "$env:RUNNER_TEMP/candidate/test-candidate-windows.ps1" -CandidateDirectory "$env:RUNNER_TEMP/candidate" -BaselineInstaller "$env:RUNNER_TEMP/baseline/UpTax-Setup-0.2.78.exe" -OutputDirectory "$env:RUNNER_TEMP/qa-results"
+          $pinsFile = '.github/scripts/candidate-windows-qa-pins.json'
+          $pins = Get-Content -LiteralPath $pinsFile -Raw | ConvertFrom-Json
+          & .github/scripts/test-candidate-windows.ps1 -CandidateDirectory "$env:RUNNER_TEMP/candidate" -BaselineInstaller (Join-Path "$env:RUNNER_TEMP/baseline" $pins.baseline.installerName) -PinsFile $pinsFile -OutputDirectory "$env:RUNNER_TEMP/qa-results"
       - name: Retain sanitized operator evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: candidate-0279-windows-qa
+          name: candidate-windows-qa
           path: ${{ runner.temp }}/qa-results/windows-install-qa.json
           if-no-files-found: warn
