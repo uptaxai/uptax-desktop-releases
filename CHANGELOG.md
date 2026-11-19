@@ -1,4 +1,4 @@
-## v0.2.85 - 2026-11-19 (Draft; publication blocked)
+## v0.2.85 - 2026-11-19 (Draft; public manual-test prerelease planned)
 
 Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
 Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `42bfa73ffa1529a6d57dfc162c15e9ac1b5a4e10`.
@@ -16,7 +16,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Changed or removed
 
-- No supported tax year, return type, integration, or packaged mapping file was intentionally removed. Drake 2025 Form 1040 input coverage changed, but complete calculated-form parity is not established. The public update channel remains unchanged.
+- No supported tax year, return type, integration, or packaged mapping file was intentionally removed. Drake 2025 Form 1040 input coverage changed, but complete calculated-form parity is not established. This candidate is intended only for a manually downloaded public prerelease; the stable automatic-update channel and published production v0.2.78 remain unchanged.
 
 ### Preservation and validation
 
@@ -27,13 +27,14 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Upgrade steps
 
-- None while draft. Complete installation, exact-asset gate and missing mapping proof before publication. Inspect Drake before repeating a partial or uncertain Send.
+- For manual testing after prerelease publication, download and install v0.2.85 explicitly on a test workstation and use synthetic returns. It is not an automatic update or a replacement for stable v0.2.78. The exact candidate already passed local installation and the release gate; a direct v0.2.78-to-v0.2.85 upgrade was not tested.
+- Before any stable promotion, complete the missing mapping proof and a live synthetic Send with the exact installer, then merge, deploy, configure and verify the backend alert path before promising production Telegram delivery. Inspect the saved Drake return before repeating a partial or uncertain Send.
 
 ### Known limitations
 
 - The selected authorized 2025 Form 1040 retains held supplied partnership K-1/QBI positions. Linked K-1 and Box 14/20Z/QBI targets need saved-return proof. Two dependent rows were allowed to remain absent; complete input coverage and calculated-form parity are not proven.
 - Backend Telegram diagnostic-card PR #94 is draft. Its current-head synthetic bot probe passed the POST, outbox, scoped staff-list, and Telegram photo-response checks; production worker/bot delivery is unverified. The generated card is not a literal error-window screenshot.
-- This candidate is unpublished.
+- This candidate is unpublished at the time of this draft. Public prerelease availability will allow manual testing only; it will not establish complete-import coverage or production Telegram delivery.
 
 ## v0.2.79 - 2026-11-17 (Draft; publication blocked)
 
