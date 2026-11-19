@@ -1,3 +1,40 @@
+## v0.2.85 - 2026-11-19 (Draft; publication blocked)
+
+Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `42bfa73ffa1529a6d57dfc162c15e9ac1b5a4e10`.
+
+### Added
+
+- Drake 2025 retains the reviewed client-creation, duplicate, backup, registration and readback safeguards and guarded structured partnership K-1 Box 1/2 input from unpublished candidates.
+- Saved and verified but incomplete Drake imports enqueue one bounded `DRAKE_PARTIAL_COVERAGE` report through the authenticated queue, recording stage `coverage` and the count of held import notes without taxpayer identity or transfer contents.
+- The installer retains the published ATX, ProSeries, Lacerte, CCH and Drake resources and the reviewed bundled UpTax interface.
+
+### Fixed
+
+- Partial Drake imports no longer disappear from the failure alert path. Stale native diagnostics cannot replace the coverage report; later exceptions remain uncertain outcomes.
+- The partial customer message says the saved Drake return must be inspected before another Send. The count names held notes rather than an exact count of tax values.
+
+### Changed or removed
+
+- No supported tax year, return type, integration, or packaged mapping file was intentionally removed. Drake 2025 Form 1040 input coverage changed, but complete calculated-form parity is not established. The public update channel remains unchanged.
+
+### Preservation and validation
+
+- Published v0.2.78 source is an ancestor; the source diff has no whitespace errors. Exact installer SHA-256 `89ecca5facb0e611abf54227f7b897622f0179e78a38024814baa4577bc51c28` (185,745,744 bytes), blockmap `4c92e3dbfef61e8087df7b25601d3ac88b6e887fce95a803bd3b0d660b83b4d2` (194,479 bytes), and updater metadata `6b372eaf14ac8ebba16f47e8e7907c01916a3f21b20233d68db652d29db4af65` (342 bytes).
+- Independently extracted v0.2.78 and 0.2.85 payloads have 19 reviewed differences, zero removed JSON leaves, and matching hashes for all 37 mapping-path files and 11 private CCH/ProSeries/ATX inputs. Of 2,111 shared bridge files, 2,110 match; the changed transfer validator was reviewed. This does not prove tax-value parity.
+- Drake .NET: 1,643 passed, zero failed or skipped. Desktop npm: 467 passed, zero failed, five skipped. Package release check passed; the unpacked candidate reached login in an isolated profile. Full repository tests remain in progress.
+- Windows canceled UAC for the installer update check, so that check and the final release gate have not passed. No live synthetic Send was completed with the exact installer.
+
+### Upgrade steps
+
+- None while draft. Complete installation, exact-asset gate and missing mapping proof before publication. Inspect Drake before repeating a partial or uncertain Send.
+
+### Known limitations
+
+- The selected authorized 2025 Form 1040 retains held supplied partnership K-1/QBI positions. Linked K-1 and Box 14/20Z/QBI targets need saved-return proof. Two dependent rows were allowed to remain absent; complete input coverage and calculated-form parity are not proven.
+- Backend Telegram diagnostic-card PR #94 is draft; production worker/bot delivery is unverified. The generated card is not a literal error-window screenshot.
+- This candidate is unpublished.
+
 ## v0.2.79 - 2026-11-17 (Draft; publication blocked)
 
 Previous production: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
