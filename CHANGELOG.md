@@ -1,3 +1,41 @@
+## v0.2.85 - 2026-11-19 (Manual-test prerelease)
+
+Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, candidate `1439947eeb0d91fc85275d1b35cea455fa61e849`.
+
+### Added
+
+- Drake 2025 retains the reviewed client-creation, duplicate, backup, registration and readback safeguards and guarded structured partnership K-1 Box 1/2 input from earlier desktop candidates.
+- Saved and verified but incomplete Drake imports enqueue one bounded `DRAKE_PARTIAL_COVERAGE` report through the authenticated queue, recording stage `coverage` and the count of held import notes without taxpayer identity or transfer contents.
+- The installer retains the published ATX, ProSeries, Lacerte, CCH and Drake resources and the reviewed bundled UpTax interface.
+
+### Fixed
+
+- Partial Drake imports no longer disappear from the failure alert path. Stale native diagnostics cannot replace the coverage report; later exceptions remain uncertain outcomes.
+- The partial customer message says the saved Drake return must be inspected before another Send. The count names held notes rather than an exact count of tax values.
+
+### Changed or removed
+
+- No supported tax year, return type, integration, or packaged mapping file was intentionally removed. Drake 2025 Form 1040 input coverage changed, but complete calculated-form parity is not established. v0.2.85 is for manually downloaded prerelease testing; stable v0.2.78 remains the production automatic-update baseline.
+
+### Preservation and validation
+
+- Published v0.2.78 source is an ancestor; the source diff has no whitespace errors. Exact installer SHA-256 `e20685416c6d94a401d3e64796d82123a5773070e3339c67df1b605a6729f409` (185,745,742 bytes), blockmap `5c67c9e9392d0ecbec503f9d83e8fb09e721a7bf045854af410126ddab040a84` (194,418 bytes), and updater metadata `2e34d241a4da56bd9976b50af6b9d0cd60d36102857211030ecd4789ef47471d` (342 bytes).
+- The independently extracted v0.2.78 and exact v0.2.85 payloads have 19 reviewed differences and zero removed JSON leaves. All 37 mapping-path files and 11 private CCH/ProSeries/ATX inputs retain their published hashes; 2,110 of 2,111 shared bridge files match, with the changed transfer validator reviewed. This comparison does not prove tax-value parity.
+- For this exact build, Drake .NET: 1,643 passed, zero failed or skipped; desktop npm: 467 passed, zero failed, five skipped; package release check passed. Final-source `./run-tests.sh` exited 0 with 637 top-level checks, no failures or top-level skips, including ATX offline packaging. The separate exact-asset release verifier is required immediately before promotion; its result is not included in these source-test counts.
+- The exact installer completed a current-user silent installation with exit code zero. An isolated same-directory current-user upgrade from v0.2.78 also passed: baseline installer exit 0 and version 0.2.78.0; candidate installer exit 0 and version 0.2.85.0. After upgrade, all 2,697 shipped physical payload files were byte-identical to the extracted candidate, with only the expected generated uninstaller extra. Isolated startup reached `/login`. The earlier all-users replacement of 0.2.83 used a previous build; an all-users install or upgrade with these bytes and a live synthetic Drake Send remain untested.
+
+### Upgrade steps
+
+- For manual testing, download and install v0.2.85 explicitly on a test workstation and use synthetic returns. It is not an automatic update or a replacement for stable v0.2.78. This exact build passed current-user installation, a same-directory v0.2.78-to-v0.2.85 current-user upgrade, and the full repository suite; the all-users variant is untested. Run the exact-asset release verifier immediately before promotion.
+- Before any stable promotion, complete the missing mapping proof and a live synthetic Send with the exact installer, then merge, deploy, configure and verify the backend alert path before promising production Telegram delivery. Inspect the saved Drake return before repeating a partial or uncertain Send.
+
+### Known limitations
+
+- The selected authorized 2025 Form 1040 retains held supplied partnership K-1/QBI positions. Linked K-1 and Box 14/20Z/QBI targets need saved-return proof. Two dependent rows were allowed to remain absent; complete input coverage and calculated-form parity are not proven.
+- Backend Telegram diagnostic-card [PR #94](https://github.com/uptaxai/uptax-backend/pull/94) passed a synthetic bot probe covering the POST, outbox, scoped staff list, and Telegram photo response; production worker/bot delivery is unverified. The generated card is not a literal error-window screenshot.
+- Manual-test prerelease availability does not establish complete-import coverage or production Telegram delivery.
+
 ## v0.2.79 - 2026-11-17 (Draft; publication blocked)
 
 Previous production: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
