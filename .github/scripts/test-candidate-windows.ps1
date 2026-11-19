@@ -2,6 +2,7 @@
 param(
     [Parameter(Mandatory)][string]$CandidateDirectory,
     [Parameter(Mandatory)][string]$BaselineInstaller,
+    [Parameter(Mandatory)][string]$PinsFile,
     [Parameter(Mandatory)][string]$OutputDirectory
 )
 $ErrorActionPreference = 'Stop'
@@ -10,34 +11,42 @@ if ($env:GITHUB_ACTIONS -ne 'true' -or $env:RUNNER_OS -ne 'Windows' -or
     (Get-Process DRAKETAX2025,UpTax -ErrorAction SilentlyContinue)) {
     throw 'Install QA requires a disposable GitHub Windows runner without Drake or UpTax.'
 }
+$pins = Get-Content -LiteralPath $PinsFile -Raw | ConvertFrom-Json
+if ($pins.schemaVersion -ne 1 -or $pins.candidate.version -notmatch '^\d+\.\d+\.\d+$' -or
+    $pins.candidate.sourceCommit -notmatch '^[a-f0-9]{40}$' -or
+    $pins.baseline.tag -notmatch '^v\d+\.\d+\.\d+$' -or
+    $pins.baseline.releaseId -le 0) { throw 'Invalid reviewed QA pins.' }
+$names = @("UpTax-Setup-$($pins.candidate.version).exe",
+    "UpTax-Setup-$($pins.candidate.version).exe.blockmap", 'latest.yml')
+if ($pins.candidate.assets.Count -ne 3) { throw 'Exactly three candidate assets are required.' }
+for ($i=0; $i -lt 3; $i++) {
+    if ($pins.candidate.assets[$i].name -ne $names[$i]) { throw 'Unexpected candidate asset name.' }
+}
 $qaRoot = Join-Path $env:RUNNER_TEMP ('uptax-install-qa-' + $env:GITHUB_RUN_ID)
 if (Test-Path -LiteralPath $qaRoot) { throw 'Refusing to reuse an install QA directory.' }
 New-Item -ItemType Directory -Path $qaRoot,$OutputDirectory -Force | Out-Null
 $installRoot = Join-Path $qaRoot 'installed'
 $sevenZip = (Get-Command 7z.exe -ErrorAction Stop).Source
-$expected = [ordered]@{
-    version = '0.2.83'
-    sourceCommit = 'f600b9bd8a9485cd82c7c7327e6fc3a255e1aef0'
-    baselineSha256 = '4f638f989963379d2ee43646080baeb53b3ae8e605cebbb6f3ff74e56a844ebe'
-    installerSha256 = '5411d9bfb1529376a9032293a8c92df7e3acd5dbe705a536c87dd1c054403df9'
-    blockmapSha256 = '73f3a4522860c399313e6531c0b48e8aeb8ce993bccbb428eb741d4d8a7ceff2'
-    metadataSha256 = '87f23a13004fbdbd790cb286d39a5096d997da1e125711d6053ff1a3a853843f'
-}
 $report = [ordered]@{
     schemaVersion = 1
-    version = $expected.version
-    baselineTag = 'v0.2.78'
-    baselineReleaseId = 442233846
-    candidateTag = 'v0.2.83'
-    sourceCommit = $expected.sourceCommit
-    baselineInstallerSha256 = $expected.baselineSha256
-    candidateInstallerSha256 = $expected.installerSha256
+    version = $pins.candidate.version
+    baselineTag = $pins.baseline.tag
+    baselineReleaseId = $pins.baseline.releaseId
+    candidateTag = "v$($pins.candidate.version)"
+    sourceCommit = $pins.candidate.sourceCommit
+    pinsSha256 = (Get-FileHash -LiteralPath $PinsFile -Algorithm SHA256).Hash.ToLowerInvariant()
+    baselineInstallerSha256 = $pins.baseline.installerSha256
+    candidateInstallerSha256 = $pins.candidate.assets[0].sha256
     startedUtc = [DateTime]::UtcNow.ToString('o')
     status = 'running'
 }
 
-function Check-Hash([string]$File,[string]$Expected) {
-    if ($Expected -notmatch '^[a-f0-9]{64}$' -or (Get-FileHash -LiteralPath $File -Algorithm SHA256).Hash.ToLowerInvariant() -ne $Expected) { throw 'QA asset hash mismatch.' }
+function Check-Hash([string]$File,[string]$Expected,[long]$ExpectedSize) {
+    if ($Expected -notmatch '^[a-f0-9]{64}$' -or $ExpectedSize -le 0 -or
+        (Get-Item -LiteralPath $File).Length -ne $ExpectedSize -or
+        (Get-FileHash -LiteralPath $File -Algorithm SHA256).Hash.ToLowerInvariant() -ne $Expected) {
+        throw 'QA asset hash or size mismatch.'
+    }
 }
 function Run-Installer([string]$File) {
     if ($installRoot -match '\s') { throw 'The isolated NSIS destination must have no spaces.' }
@@ -101,18 +110,18 @@ function Read-Renderer([string]$Socket) {
     } finally { $client.Dispose(); $deadline.Dispose() }
 }
 try {
-    Check-Hash $BaselineInstaller $expected.baselineSha256
-    Check-Hash (Join-Path $CandidateDirectory 'UpTax-Setup-0.2.83.exe') $expected.installerSha256
-    Check-Hash (Join-Path $CandidateDirectory 'UpTax-Setup-0.2.83.exe.blockmap') $expected.blockmapSha256
-    Check-Hash (Join-Path $CandidateDirectory 'latest.yml') $expected.metadataSha256
-    $candidate = Join-Path $CandidateDirectory 'UpTax-Setup-0.2.83.exe'
+    Check-Hash $BaselineInstaller $pins.baseline.installerSha256 $pins.baseline.installerSize
+    foreach ($asset in $pins.candidate.assets) {
+        Check-Hash (Join-Path $CandidateDirectory $asset.name) $asset.sha256 $asset.size
+    }
+    $candidate = Join-Path $CandidateDirectory $names[0]
     $baselinePayload = Expand-Installer $BaselineInstaller 'baseline'
     $candidatePayload = Expand-Installer $candidate 'candidate'
     Run-Installer $BaselineInstaller
     Stop-OwnedApp
     $report.baselineInstalledFiles = Compare-Installed $baselinePayload
     $baselineVersion = [Diagnostics.FileVersionInfo]::GetVersionInfo((Join-Path $installRoot 'UpTax.exe')).ProductVersion
-    if ($baselineVersion -ne '0.2.78.0') { throw 'Baseline product version mismatch.' }
+    if ($baselineVersion -ne ($pins.baseline.tag.Substring(1)+'.0')) { throw 'Baseline product version mismatch.' }
     $report.baselineProductVersion = $baselineVersion
     Run-Installer $candidate
     Stop-OwnedApp
@@ -120,7 +129,7 @@ try {
     $report.sameDirectoryUpgrade = $true
     $executable = Join-Path $installRoot 'UpTax.exe'
     $report.productVersion = [Diagnostics.FileVersionInfo]::GetVersionInfo($executable).ProductVersion
-    if ($report.productVersion -ne '0.2.83.0') { throw 'Installed product version mismatch.' }
+    if ($report.productVersion -ne ($pins.candidate.version+'.0')) { throw 'Installed product version mismatch.' }
     $pe = [IO.File]::ReadAllBytes($executable)
     $peOffset = [BitConverter]::ToInt32($pe,0x3c)
     if ([BitConverter]::ToUInt16($pe,$peOffset+4) -ne 0x8664) { throw 'Installed application is not Windows x64.' }
