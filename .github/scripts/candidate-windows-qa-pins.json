@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "baseline": {
+    "releaseId": 442233846,
+    "tag": "v0.2.78",
+    "installerName": "UpTax-Setup-0.2.78.exe",
+    "installerSize": 185456505,
+    "installerSha256": "4f638f989963379d2ee43646080baeb53b3ae8e605cebbb6f3ff74e56a844ebe"
+  },
+  "candidate": {
+    "version": "0.2.83",
+    "sourceCommit": "f600b9bd8a9485cd82c7c7327e6fc3a255e1aef0",
+    "assets": [
+      {
+        "name": "UpTax-Setup-0.2.83.exe",
+        "size": 185745423,
+        "sha256": "5411d9bfb1529376a9032293a8c92df7e3acd5dbe705a536c87dd1c054403df9"
+      },
+      {
+        "name": "UpTax-Setup-0.2.83.exe.blockmap",
+        "size": 194266,
+        "sha256": "73f3a4522860c399313e6531c0b48e8aeb8ce993bccbb428eb741d4d8a7ceff2"
+      },
+      {
+        "name": "latest.yml",
+        "size": 342,
+        "sha256": "87f23a13004fbdbd790cb286d39a5096d997da1e125711d6053ff1a3a853843f"
+      }
+    ]
+  }
+}
