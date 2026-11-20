@@ -6,6 +6,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Added
 
 - Drake 2025 Form 1040 gains reviewed conditional input paths for Schedule E, F, and R; partnership, S-corporation, and fiduciary K-1 worksheets; and related activity, asset, vehicle, home-office, and depreciation details. Synthetic source and saved-record tests cover mapped paths, including guarded partnership Box 14 A/C facts.
+- Because v0.2.85 was a prerelease, this candidate also carries the earlier reviewed Drake W-2/W2PR, Schedule C/D, client-creation, backup, registration, and readback work from the unpublished desktop candidates after production v0.2.78.
 - The bounded partial-coverage diagnostic and authenticated desktop failure queue from v0.2.85 remain included. Published ATX, ProSeries, Lacerte, CCH, and Drake resources are intended to remain in the installer, subject to exact payload comparison.
 
 ### Fixed
