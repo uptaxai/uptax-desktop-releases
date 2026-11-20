@@ -1,3 +1,37 @@
+## v0.2.86 - 2026-11-20 (Draft manual-test prerelease)
+
+Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`; final candidate commit pending (current mapping checkpoint `6cd268358b83b42b3c211ef51ffa32e0db5c7e42`). Update this draft with the exact built-source commit before release.
+
+### Added
+
+- Drake 2025 Form 1040 gains reviewed conditional input paths for Schedule E, F, and R; partnership, S-corporation, and fiduciary K-1 worksheets; and related activity, asset, vehicle, home-office, and depreciation details. Synthetic source and saved-record tests cover mapped paths, including guarded partnership Box 14 A/C facts.
+- The bounded partial-coverage diagnostic and authenticated desktop failure queue from v0.2.85 remain included. Published ATX, ProSeries, Lacerte, CCH, and Drake resources are intended to remain in the installer, subject to exact payload comparison.
+
+### Fixed
+
+- Conflicting, duplicate, or ownerless partnership steps are held instead of being attached to a linked K-1 record. A Box 14 display step is consumed only when its original source, reviewed K-1 row, owner, issuer, amount, and saved destination agree.
+- Existing Drake backup, duplicate-client, and uncertain-outcome safeguards remain in effect; a partial or uncertain Send still requires inspection in Drake before another attempt.
+
+### Changed or removed
+
+- No supported tax year, return type, integration, or packaged mapping path was intentionally removed. The new native bindings expand conditional input coverage; they do not establish complete return import or calculated-form parity.
+- This candidate is for explicit manual-test prerelease use. Stable automatic updates remain on v0.2.78; no update-channel or backend deployment is part of this draft.
+
+### Preservation and validation
+
+- The v0.2.78 production source is an ancestor of the current mapping checkpoint. The post-v0.2.85 functional source changes are in Drake native mapping and tests. Final source-diff review, exact packaged payload inventory, mapping/resource preservation, installer hashes, and release gate remain pending.
+- At the source checkpoint, the native .NET solution passed 2,058/2,058 tests with no failures or skips; desktop npm tests passed 467 of 472 with five environment-dependent skips. The repository-wide suite and exact 0.2.86 artifact, package, and install/update checks remain pending. Earlier v0.2.85 artifact evidence does not validate this build.
+
+### Upgrade steps
+
+- None while this is a draft. If published as a manual-test prerelease, download it explicitly for synthetic testing; it will not replace stable automatic updates. Inspect an existing Drake return before repeating a Send after a partial or uncertain outcome.
+
+### Known limitations
+
+- One authorized 2025 return still has 51 held import positions. Its current signed packet lacks per-business QBI rows, one partnership owner proof and rental basis evidence; two dependent fact sets remain incomplete. That return has not passed complete saved-field or calculated-form comparison. No complete-import or exact-tax-parity claim is made.
+- A live Send through the exact 0.2.86 installer and production Telegram alert delivery remain unverified. The alert is a bounded diagnostic, not a literal screenshot of a Drake error window. Backend alert changes and deployment are separate from this EXE.
+
 ## v0.2.85 - 2026-11-19 (Manual-test prerelease)
 
 Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
