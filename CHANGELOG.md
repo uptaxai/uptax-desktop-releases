@@ -1,13 +1,13 @@
 ## v0.2.86 - 2026-11-20 (Draft manual-test prerelease)
 
 Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
-Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`; final candidate commit pending (current mapping checkpoint `6cd268358b83b42b3c211ef51ffa32e0db5c7e42`). Update this draft with the exact built-source commit before release.
+Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, exact built candidate `0cb22d8ea483f116652488c74522e008d8f2efea`.
 
 ### Added
 
 - Drake 2025 Form 1040 gains reviewed conditional input paths for Schedule E, F, and R; partnership, S-corporation, and fiduciary K-1 worksheets; and related activity, asset, vehicle, home-office, and depreciation details. Synthetic source and saved-record tests cover mapped paths, including guarded partnership Box 14 A/C facts.
 - Because v0.2.85 was a prerelease, this candidate also carries the earlier reviewed Drake W-2/W2PR, Schedule C/D, client-creation, backup, registration, and readback work from the unpublished desktop candidates after production v0.2.78.
-- The bounded partial-coverage diagnostic and authenticated desktop failure queue from v0.2.85 remain included. Published ATX, ProSeries, Lacerte, CCH, and Drake resources are intended to remain in the installer, subject to exact payload comparison.
+- The bounded partial-coverage diagnostic and authenticated desktop failure queue from v0.2.85 remain included. The exact payload comparison found no unexplained removal of the published ATX, ProSeries, Lacerte, CCH, and Drake resources.
 
 ### Fixed
 
@@ -21,8 +21,10 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Preservation and validation
 
-- The v0.2.78 production source is an ancestor of the current mapping checkpoint. The post-v0.2.85 functional source changes are in Drake native mapping and tests. Final source-diff review, exact packaged payload inventory, mapping/resource preservation, installer hashes, and release gate remain pending.
-- At the source checkpoint, the native .NET solution passed 2,058/2,058 tests with no failures or skips; desktop npm tests passed 467 of 472 with five environment-dependent skips. The repository-wide suite and exact 0.2.86 artifact, package, and install/update checks remain pending. Earlier v0.2.85 artifact evidence does not validate this build.
+- The v0.2.78 production source is an ancestor of the exact built source. The post-v0.2.85 functional changes are in Drake native mapping and tests. Independent extraction of the shipped v0.2.78 and exact v0.2.86 installers found 19 reviewed payload differences and zero removed structural JSON leaves. The final release gate remains pending.
+- Exact installer: 185,810,198 bytes, SHA-256 `cc3db2e798df5883cd043b41dfb83f852bf57f475755a0e9ed474fecce4dbfaf`; blockmap: 194,352 bytes, SHA-256 `873d35d68bad3aa7b01676172ba62f62030846969e1f0ff860e5ec0f4fe575d4`; `latest.yml`: 342 bytes, SHA-256 `c9fc4a57fce1222e87b8498e0b5940b48272d539d61dbde9bd94945b8e5905dc`. Exact package check passed.
+- Native .NET solution: 2,058/2,058 tests passed, no failures or skips. Desktop npm: 467 passed, zero failed, five environment-dependent skips. The repository `./run-tests.sh` exited 0: 637 top-level checks passed, zero failed or skipped, including ATX offline packaging. Earlier v0.2.85 tests do not validate these bytes.
+- The exact installer passed a fresh current-user installation and a direct same-directory v0.2.78-to-v0.2.86 current-user upgrade, both exit 0. All 2,697 installed payload files matched the extracted candidate. Isolated startup showed one UpTax page at route `/`; this does not prove a signed-in Send or a `/login` screen.
 
 ### Upgrade steps
 
@@ -111,7 +113,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 - Publication remains blocked by the non-green source gate. Windows package QA does not establish complete tax reconciliation, live production Send, or production bot delivery.
 - The frozen-plan verifier was run after QA and rejected publication with `Missing passing evidence: source-tests`; asset hashes, production baseline and payload comparison were checked before that failure.
-- Retained K1PA screens 406â€“414 in separate importer PR #233 lack a supported ordinary UI route and remain unverified; this candidate does not certify that separate feature.
+- Retained K1PA screens 406Ã¢â‚¬â€œ414 in separate importer PR #233 lack a supported ordinary UI route and remain unverified; this candidate does not certify that separate feature.
 - Draft assets are not a published release. The public production channel remains v0.2.78.
 
 
@@ -156,7 +158,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Upgrade steps
 
 - Publication is blocked pending a replacement candidate incorporating integrations [review fix `82a7ce43391ddb4da6695bdcaeacd0f36f944d8b`](https://github.com/uptaxai/uptax-integrations/commit/82a7ce43391ddb4da6695bdcaeacd0f36f944d8b) and a reviewed shipped-UI backport of frontend [fix `a9b8e617`](https://github.com/uptaxai/uptax-frontend/commit/a9b8e617). Build from the resulting exact committed sources; repeat source, packaged regression, inventory/preservation, startup and applicable install/update checks; freeze new asset hashes and a new manifest. Rerun the release verifier against the then-current production baseline immediately before any separately authorized publication. Do not relabel the old installer or reuse its test evidence for new bytes.
-- Backend draft [PR #77](https://github.com/uptaxai/uptax-backend/pull/77) now includes a bounded recovery command for Telegram alerts stopped by a permanent API rejection. After correcting bot settings, an operator previews 1Ã¢â‚¬â€œ20 explicit outbox IDs with `requeue_stopped_transfer_failure_alerts --alert-id <id>` and adds `--apply` only for eligible rows; sent alerts and attempt history are preserved. [Current-head CI run 43575134827](https://github.com/uptaxai/uptax-backend/actions/runs/43575134827) passed 51 PostgreSQL-backed focused tests with deployment skipped. An intermediate run 43572826500 stopped at inherited OpenAPI drift before tests; the merged backend main and a reviewed two-field schema sync resolved it. This is a recovery option, not evidence that the production worker or bot is active.
+- Backend draft [PR #77](https://github.com/uptaxai/uptax-backend/pull/77) now includes a bounded recovery command for Telegram alerts stopped by a permanent API rejection. After correcting bot settings, an operator previews 1ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“20 explicit outbox IDs with `requeue_stopped_transfer_failure_alerts --alert-id <id>` and adds `--apply` only for eligible rows; sent alerts and attempt history are preserved. [Current-head CI run 43575134827](https://github.com/uptaxai/uptax-backend/actions/runs/43575134827) passed 51 PostgreSQL-backed focused tests with deployment skipped. An intermediate run 43572826500 stopped at inherited OpenAPI drift before tests; the merged backend main and a reviewed two-field schema sync resolved it. This is a recovery option, not evidence that the production worker or bot is active.
 - The candidate installer was built locally without publishing. Confirm the merged backend Telegram alert code and migration 0123 are deployed, configure the server bot settings, and verify the worker before staff depend on production bot notifications; the pre-dispatch timeout alert catalog also requires draft backend PR #77. Current-main frontend PR #38 should pass review before subsequent frontend builds. Users should review every imported return and manual-completion report before filing.
 
 ### Known limitations
