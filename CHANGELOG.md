@@ -21,7 +21,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 
 ### Preservation and validation
 
-- The v0.2.78 production source is an ancestor of the exact built source. The post-v0.2.85 functional changes are in Drake native mapping and tests. Independent extraction of the shipped v0.2.78 and exact v0.2.86 installers found 19 reviewed payload differences and zero removed structural JSON leaves. The final release gate remains pending.
+- The v0.2.78 production source is an ancestor of the exact built source. The post-v0.2.85 functional changes are in Drake native mapping and tests. Independent extraction of the shipped v0.2.78 and exact v0.2.86 installers found 19 reviewed payload differences and zero removed structural JSON leaves. The release preservation gate passed all six checks for the frozen assets; it is rerun immediately before promotion.
 - Exact installer: 185,810,198 bytes, SHA-256 `cc3db2e798df5883cd043b41dfb83f852bf57f475755a0e9ed474fecce4dbfaf`; blockmap: 194,352 bytes, SHA-256 `873d35d68bad3aa7b01676172ba62f62030846969e1f0ff860e5ec0f4fe575d4`; `latest.yml`: 342 bytes, SHA-256 `c9fc4a57fce1222e87b8498e0b5940b48272d539d61dbde9bd94945b8e5905dc`. Exact package check passed.
 - Native .NET solution: 2,058/2,058 tests passed, no failures or skips. Desktop npm: 467 passed, zero failed, five environment-dependent skips. The repository `./run-tests.sh` exited 0: 637 top-level checks passed, zero failed or skipped, including ATX offline packaging. Earlier v0.2.85 tests do not validate these bytes.
 - The exact installer passed a fresh current-user installation and a direct same-directory v0.2.78-to-v0.2.86 current-user upgrade, both exit 0. All 2,697 installed payload files matched the extracted candidate. Isolated startup showed one UpTax page at route `/`; this does not prove a signed-in Send or a `/login` screen.
@@ -33,7 +33,7 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Known limitations
 
 - One authorized 2025 return still has 51 held import positions. Its current signed packet lacks per-business QBI rows, one partnership owner proof and rental basis evidence; two dependent fact sets remain incomplete. That return has not passed complete saved-field or calculated-form comparison. No complete-import or exact-tax-parity claim is made.
-- A live Send through the exact 0.2.86 installer and production Telegram alert delivery remain unverified. The alert is a bounded diagnostic, not a literal screenshot of a Drake error window. Backend alert changes and deployment are separate from this EXE.
+- The manual-test installer is unsigned. A live Send through the exact 0.2.86 installer and production Telegram alert delivery remain unverified. The alert is a bounded diagnostic, not a literal screenshot of a Drake error window. Backend alert changes and deployment are separate from this EXE.
 
 ## v0.2.85 - 2026-11-19 (Manual-test prerelease)
 
