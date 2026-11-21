@@ -1,4 +1,6 @@
-## v0.2.86 - 2026-11-20 (Draft manual-test prerelease)
+## v0.2.86 - 2026-11-21 (Published manual-test prerelease)
+
+Published at https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.86.
 
 Previous production release: [v0.2.78](https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.78).
 Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integrations), baseline `8e962065b039b1039dd1fbd41ff787f4a7986ca5`, exact built candidate `0cb22d8ea483f116652488c74522e008d8f2efea`.
@@ -17,18 +19,18 @@ Source: [uptaxai/uptax-integrations](https://github.com/uptaxai/uptax-integratio
 ### Changed or removed
 
 - No supported tax year, return type, integration, or packaged mapping path was intentionally removed. The new native bindings expand conditional input coverage; they do not establish complete return import or calculated-form parity.
-- This candidate is for explicit manual-test prerelease use. Stable automatic updates remain on v0.2.78; no update-channel or backend deployment is part of this draft.
+- This release is for explicit manual-test prerelease use. Stable automatic updates remain on v0.2.78; no update-channel or backend deployment accompanied it.
 
 ### Preservation and validation
 
-- The v0.2.78 production source is an ancestor of the exact built source. The post-v0.2.85 functional changes are in Drake native mapping and tests. Independent extraction of the shipped v0.2.78 and exact v0.2.86 installers found 19 reviewed payload differences and zero removed structural JSON leaves. The release preservation gate passed all six checks for the frozen assets; it is rerun immediately before promotion.
+- The v0.2.78 production source is an ancestor of the exact built source. The post-v0.2.85 functional changes are in Drake native mapping and tests. Independent extraction of the shipped v0.2.78 and exact v0.2.86 installers found 19 reviewed payload differences and zero removed structural JSON leaves. The release preservation gate passed all six checks for the frozen assets; it was rerun immediately before promotion. Published downloads of all ten assets matched their tested hashes.
 - Exact installer: 185,810,198 bytes, SHA-256 `cc3db2e798df5883cd043b41dfb83f852bf57f475755a0e9ed474fecce4dbfaf`; blockmap: 194,352 bytes, SHA-256 `873d35d68bad3aa7b01676172ba62f62030846969e1f0ff860e5ec0f4fe575d4`; `latest.yml`: 342 bytes, SHA-256 `c9fc4a57fce1222e87b8498e0b5940b48272d539d61dbde9bd94945b8e5905dc`. Exact package check passed.
 - Native .NET solution: 2,058/2,058 tests passed, no failures or skips. Desktop npm: 467 passed, zero failed, five environment-dependent skips. The repository `./run-tests.sh` exited 0: 637 top-level checks passed, zero failed or skipped, including ATX offline packaging. Earlier v0.2.85 tests do not validate these bytes.
 - The exact installer passed a fresh current-user installation and a direct same-directory v0.2.78-to-v0.2.86 current-user upgrade, both exit 0. All 2,697 installed payload files matched the extracted candidate. Isolated startup showed one UpTax page at route `/`; this does not prove a signed-in Send or a `/login` screen.
 
 ### Upgrade steps
 
-- None while this is a draft. If published as a manual-test prerelease, download it explicitly for synthetic testing; it will not replace stable automatic updates. Inspect an existing Drake return before repeating a Send after a partial or uncertain outcome.
+- Download this unsigned manual-test prerelease explicitly for synthetic testing; it does not replace stable automatic updates. Inspect an existing Drake return before repeating a Send after a partial or uncertain outcome.
 
 ### Known limitations
 
