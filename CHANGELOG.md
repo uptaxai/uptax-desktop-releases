@@ -1,3 +1,22 @@
+## v0.2.90 - 2026-11-25 (Draft)
+
+Source: f1d3916313eadb74a04b4eb2f947c4f01bedf6e6
+Production baseline: v0.2.89 (f2cc2cf6468a72504caa163638fc96fae97b0844)
+
+### Added
+- Selected Drake mixed 1099-INT/OID and Form 5329 Part I mappings, including narrow spouse routes.
+### Fixed
+- Waits for the Drake New Return client-ID confirmation field and stops safely if it is unavailable.
+- Excludes payer routing numbers from native transfer while retaining permitted printed account numbers.
+### Changed or removed
+- Updates the Drake importer and desktop transfer handling. Package comparison found no removed files or JSON fields.
+### Preservation and validation
+- 637 repository checks and 5,664 native tests passed. Windows fresh install, upgrade, and responsive startup passed. All 2,698 packaged files matched after installation and upgrade.
+### Known limitations
+- Newer QBI and capital-gain draft routes with unresolved calculation differences are outside this build. Some Drake source data remains in manual review. Backend redaction is tracked separately.
+### Upgrade steps
+- Use the UpTax update prompt or download the Windows installer. Save open work before restarting to install.
+
 ## v0.2.86 - 2026-11-21 (Published manual-test prerelease)
 
 Published at https://github.com/uptaxai/uptax-desktop-releases/releases/tag/v0.2.86.
