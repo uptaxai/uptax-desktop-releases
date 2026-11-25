@@ -1,3 +1,21 @@
+## v0.2.91 - 2026-11-25 (Draft)
+
+Source: a45c5cffc909db5d2531d07d5c3c8d6e8f50f103
+Previous production: v0.2.90 (f1d3916313eadb74a04b4eb2f947c4f01bedf6e6)
+
+### Added
+- Automatically continues with prepared Drake draft fields when preflight confirms a partial import can proceed.
+### Fixed
+- Recognizes Drake's New Return dialog when its accessibility window ID varies and continues to verify the client ID before creation.
+### Changed or removed
+- Removes the extra partial-draft confirmation dialog. Unresolved items remain visible in the result.
+### Preservation and validation
+- Package comparison found no removed files or JSON fields. Windows synthetic dialog tests covered the alternate dialog ID and refusal when client-ID confirmation is unavailable.
+### Known limitations
+- Unsupported or unresolved fields still require review. The affected workstation has yet to verify the new dialog handling.
+### Upgrade steps
+- Save open work, then install the update and restart UpTax.
+
 ## v0.2.90 - 2026-11-25 (Published)
 
 Source: f1d3916313eadb74a04b4eb2f947c4f01bedf6e6
