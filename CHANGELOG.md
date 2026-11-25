@@ -1,4 +1,4 @@
-## v0.2.90 - 2026-11-25 (Draft)
+## v0.2.90 - 2026-11-25 (Published)
 
 Source: f1d3916313eadb74a04b4eb2f947c4f01bedf6e6
 Production baseline: v0.2.89 (f2cc2cf6468a72504caa163638fc96fae97b0844)
